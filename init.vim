@@ -1,33 +1,41 @@
 call plug#begin("~/.config/nvim/plugged")
     " File Explorer
     Plug 'scrooloose/nerdtree'
+
     " Colorscheme
-"    Plug 'dracula/vim'
-"    Plug 'morhetz/gruvbox'
-    "File search
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+    "Plug 'dracula/vim'
+    "Plug 'morhetz/gruvbox'
+    "Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Retro Scheme
+
+    " File search
+    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    "Plug 'junegunn/fzf.vim'
 
     " Python syntax highlight
     Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
-    Plug 'vim-airline/vim-airline'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'jlanzarotta/bufexplorer'
+    Plug 'https://github.com/ap/vim-css-color'  " CSS Color Preview
+    Plug 'vim-airline/vim-airline'              " Status bar
+    Plug 'jiangmiao/auto-pairs'                 " Autocomplete pair symbols
+    Plug 'scrooloose/nerdcommenter'             " comment/ucomment lines
+    Plug 'jlanzarotta/bufexplorer'              " buffer for open files
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'sbdchd/neoformat'
+    Plug 'sbdchd/neoformat'                     " code auto format
+
+    Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 
     Plug 'tomlion/vim-solidity'
     Plug 'davidhalter/jedi-vim'
-"    Plug 'zchee/deoplete-jedi'
+    "Plug 'zchee/deoplete-jedi'
 
 call plug#end()
 "Config Section
 
 filetype on
 
-" Временные файл
+set encoding=UTF-8
+
+" temp files
 set backup
 set backupdir=~/.tmpvim,/tmp
 set directory=~/.tmpvim,/tmp
@@ -182,7 +190,13 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit'
   \}
 
-let g:deoplete#enable_at_startup = 1
+"nnoremap <silent> <C-b> :BufExplorerHorizontalSplit<CR>
+nnoremap <silent> <C-b> :BufExplorer<CR>
+
+nmap <F3> :TagbarToggle<CR>
+nmap <F8> :Neoformat<CR>
+
+"let g:deoplete#enable_at_startup = 1
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
@@ -199,3 +213,33 @@ let g:jedi#completions_enabled = 1
 
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
+
+
+map ,ca           <Plug>NERDCommenterAltDelims
+map ,cu           <Plug>NERDCommenterUncomment
+map ,cb           <Plug>NERDCommenterAlignBoth
+map ,cl           <Plug>NERDCommenterAlignLeft
+map ,cy           <Plug>NERDCommenterYank
+map ,cs           <Plug>NERDCommenterSexy
+map ,ci           <Plug>NERDCommenterInvert
+map ,c$           <Plug>NERDCommenterToEOL
+map ,cn           <Plug>NERDCommenterNested
+map ,cm           <Plug>NERDCommenterMinimal
+map ,c<Space>     <Plug>NERDCommenterToggle
+map ,cc           <Plug>NERDCommenterComment
+
+
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline_theme='dark'
+let g:airline_enable_fugitive=1
+let g:airline_enable_syntastic=1
+let g:airline_enable_bufferline=1
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_linecolumn_prefix = '¶ '
+let g:airline_fugitive_prefix = '⎇ '
+let g:airline_paste_symbol = 'ρ'
+
+"let g:airline_section_b = '%{fugitive#head()}'
+let g:airline_section_c = '%t'
