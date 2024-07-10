@@ -1,63 +1,34 @@
 call plug#begin("~/.config/nvim/plugged")
-" File Explorer
 
-Plug 'jlanzarotta/bufexplorer'
-Plug 'preservim/nerdcommenter'
-Plug 'preservim/nerdtree'
+" colorschemes
+Plug 'folke/tokyonight.nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'luisiacc/gruvbox-baby'
+
+Plug 'jlanzarotta/bufexplorer'          " Buffer explorer
+Plug 'preservim/nerdcommenter'          " Commenting tool
+Plug 'preservim/nerdtree'               " File explorer
 Plug 'ervandew/supertab'
-Plug 'vim-syntastic/syntastic'
-Plug 'vim-autoformat/vim-autoformat'
-Plug 'tell-k/vim-autopep8'
-Plug 'alvan/vim-closetag'
-Plug 'henrik/vim-indexed-search'
-Plug 'stephpy/vim-php-cs-fixer'
-Plug 'alvan/vim-php-manual'
+Plug 'vim-syntastic/syntastic'          " Syntax checker
+Plug 'tell-k/vim-autopep8'              " Auto format python code
+Plug 'alvan/vim-closetag'               " Auto close html tags
+Plug 'henrik/vim-indexed-search'        " Highlight search results
+Plug 'stephpy/vim-php-cs-fixer'         " PHP code fixer
+Plug 'alvan/vim-php-manual'             " PHP documentation lookup
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'LunarWatcher/auto-pairs'
-Plug 'sbdchd/neoformat'                     " code auto format
-
-"Plug 'scrooloose/nerdtree'
-"Plug 'scrooloose/nerdcommenter'             " comment/ucomment lines
+Plug 'LunarWatcher/auto-pairs'          " Auto close brackets
+Plug 'sbdchd/neoformat'                 " code auto format
 
 
 " Python syntax highlight
-"Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
-
-"Plug 'https://github.com/ap/vim-css-color'  " CSS Color Preview
-"Plug 'jiangmiao/auto-pairs'                 " Autocomplete pair symbols
-"Plug 'jlanzarotta/bufexplorer'              " buffer for open files
-
-" statusline
-"Plug 'vim-airline/vim-airline'              " Status bar
-
-"Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
-" PHP Manuals
-"Plug 'alvan/vim-php-manual'
-
-" Autocomplete tools
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'hrsh7th/cmp-nvim-lsp'
-"Plug 'hrsh7th/cmp-buffer'
-"Plug 'hrsh7th/cmp-path'
-"Plug 'hrsh7th/cmp-cmdline'
-"Plug 'hrsh7th/nvim-cmp'
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 
 " ###########
 "
 "Plug 'natebosch/vim-lsc'
 "Plug 'natebosch/vim-lsc-dart'
 "Plug 'prabirshrestha/asyncomplete.vim'
-
-"Plug 'ncm2/ncm2'
-"Plug 'roxma/nvim-yarp'
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
-"Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-"Plug 'phpactor/ncm2-phpactor'
 
 "Plug 'alaviss/nim.nvim'
 "Plug 'tomlion/vim-solidity'
@@ -68,6 +39,7 @@ Plug 'sbdchd/neoformat'                     " code auto format
 "Plug 'dart-lang/dart-vim-plugin'
 "Plug 'thosakwe/vim-flutter'
 call plug#end()
+
 "Config Section
 
 "necessary on some Linux distros for pathogen to properly load bundles
@@ -410,3 +382,8 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 "
 let g:closetag_close_shortcut = '<leader>>'
+
+" SnipMate settings
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases.php = 'php, html'
