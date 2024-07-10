@@ -1,67 +1,116 @@
 call plug#begin("~/.config/nvim/plugged")
-    " File Explorer
-    Plug 'scrooloose/nerdtree'
+" File Explorer
 
-    " Colorscheme
-    "Plug 'dracula/vim'
-    "Plug 'morhetz/gruvbox'
-    "Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Retro Scheme
+Plug 'jlanzarotta/bufexplorer'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
+Plug 'ervandew/supertab'
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-autoformat/vim-autoformat'
+Plug 'tell-k/vim-autopep8'
+Plug 'alvan/vim-closetag'
+Plug 'henrik/vim-indexed-search'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'alvan/vim-php-manual'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'LunarWatcher/auto-pairs'
+Plug 'sbdchd/neoformat'                     " code auto format
 
-    " File search
-    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    "Plug 'junegunn/fzf.vim'
+"Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdcommenter'             " comment/ucomment lines
 
-    " Python syntax highlight
-    Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
-    Plug 'https://github.com/ap/vim-css-color'  " CSS Color Preview
-    Plug 'jiangmiao/auto-pairs'                 " Autocomplete pair symbols
-    Plug 'scrooloose/nerdcommenter'             " comment/ucomment lines
-    Plug 'jlanzarotta/bufexplorer'              " buffer for open files
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'sbdchd/neoformat'                     " code auto format
+" Python syntax highlight
+"Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 
-    " statusline
-    Plug 'vim-airline/vim-airline'              " Status bar
+"Plug 'https://github.com/ap/vim-css-color'  " CSS Color Preview
+"Plug 'jiangmiao/auto-pairs'                 " Autocomplete pair symbols
+"Plug 'jlanzarotta/bufexplorer'              " buffer for open files
 
-    Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
+" statusline
+"Plug 'vim-airline/vim-airline'              " Status bar
 
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
+" PHP Manuals
+"Plug 'alvan/vim-php-manual'
 
-    Plug 'tomlion/vim-solidity'
-    "Plug 'davidhalter/jedi-vim'
-    "Plug 'zchee/deoplete-jedi'
-    
-    "Dart/Flutter
-    Plug 'dart-lang/dart-vim-plugin'
-    Plug 'thosakwe/vim-flutter'
-    "Plug 'natebosch/vim-lsc'
-    "Plug 'natebosch/vim-lsc-dart' 
-    call plug#end()
-"Config Section
+" Autocomplete tools
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'hrsh7th/cmp-nvim-lsp'
+"Plug 'hrsh7th/cmp-buffer'
+"Plug 'hrsh7th/cmp-path'
+"Plug 'hrsh7th/cmp-cmdline'
+"Plug 'hrsh7th/nvim-cmp'
+
+" ###########
+"
+"Plug 'natebosch/vim-lsc'
+"Plug 'natebosch/vim-lsc-dart'
+"Plug 'prabirshrestha/asyncomplete.vim'
+
+"Plug 'ncm2/ncm2'
+"Plug 'roxma/nvim-yarp'
+"Plug 'ncm2/ncm2-bufword'
+"Plug 'ncm2/ncm2-path'
+"Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+"Plug 'phpactor/ncm2-phpactor'
+
+"Plug 'alaviss/nim.nvim'
+"Plug 'tomlion/vim-solidity'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'zchee/deoplete-jedi'
+
+"Dart/Flutter
+"Plug 'dart-lang/dart-vim-plugin'
+"Plug 'thosakwe/vim-flutter'
+call plug#end()
+"Config Section
+
+"necessary on some Linux distros for pathogen to properly load bundles
 filetype on
 
-set encoding=UTF-8
+"turn on syntax highlighting
+syntax on
 
-" temp files
+" Set encoding to UTF-8
+set encoding=utf-8
+
+set background=dark
+colorscheme neverland2-darker
+
+" temprorary files
 set backup
 set backupdir=~/.tmpvim,/tmp
 set directory=~/.tmpvim,/tmp
 set dir=~/.tmpvim,/tmp
 set undodir=~/.tmpvim,/tmp
 
+set undofile                " Save undos after file closes
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
+
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
 set nocompatible
-
-set path+=**
 
 "allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
 "store lots of :cmdline history
-set history=1000
+set history=200
 
 set showcmd     "show incomplete cmds down the bottom
 set showmode    "show current mode down the bottom
@@ -71,33 +120,48 @@ set hlsearch    "hilight searches by default
 set ignorecase
 set smartcase
 
-"Убарть подсветку поиска при нажатии space"
+" Improve the scrolling performance
+set lazyredraw
+set regexpengine=1
+
+" Enable mouse wheel scrolling
+set mouse=a
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+"Remove search highlight pressing space
 nnoremap <silent> <Space> :nohl<Bar>:echo<CR>
 
 set number      "add line numbers
 set showbreak=...
 set wrap linebreak nolist
 
+"mapping for command key to map navigation thru display lines instead
+"of just numbered lines
+vmap <D-j> gj
+vmap <D-k> gk
+vmap <D-4> g$
+vmap <D-6> g^
+vmap <D-0> g^
+nmap <D-j> gj
+nmap <D-k> gk
+nmap <D-4> g$
+nmap <D-6> g^
+nmap <D-0> g^
+
 "add some line space for easy reading
 set linespace=4
+
+"disable visual bell
+set visualbell t_vb=
 
 "try to make possible to navigate within lines of wrapped lines
 nmap <Down> gj
 nmap <Up> gk
-set fo=l
 
-"statusline setup
-set statusline=%f       "tail of the filename
-
-"Git
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set laststatus=2
-
-"turn off needless toolbar on gvim/mvim
-set guioptions-=T
+"recalculate the trailing whitespace warning when idle, and after saving
+autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 
 "indent settings
 set shiftwidth=4
@@ -105,11 +169,12 @@ set softtabstop=4
 set expandtab
 set autoindent
 set tabstop=4
+set smarttab
 set fileformat=unix
 set textwidth=120
 
 "folding settings
-set foldmethod=indent   "fold based on indent
+set foldmethod=syntax
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
@@ -129,39 +194,41 @@ set sidescroll=1
 "load ftplugins and indent files
 filetype plugin on
 filetype indent on
-
-"turn on syntax highlighting
-syntax on
-
-"some stuff to get the mouse going in term
-set mouse=a
+filetype plugin indent on
 
 "hide buffers when not displayed
 set hidden
 
-if (has("termguicolors"))
- set termguicolors
-endif
+silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
+nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
+nnoremap <silent> <C-d> :call PhpDocSingle()<CR>
+nnoremap <silent> <C-b> :BufExplorerHorizontalSplit<CR>
 
-colorscheme neverland2-darker
+autocmd FileType php noremap <buffer>  <F8> :call PhpCsFixerFixFile()<cr>
+autocmd FileType python noremap <buffer>  <F8> :call Autopep8()<cr>
 
-syntax enable
+"make <c-l> clear the highlight as well as redraw
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
 
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = []
-let g:NERDTreeStatusline = ''
-" Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Toggle
-nnoremap <silent> <C-f> :NERDTreeToggle<CR>
+"map Q to something useful
+noremap Q gq
 
-"key mapping for saving file
-nmap <C-s> :w<CR>
-imap <C-s> :w<CR>
-imap <C-j> <ESC><ESC>
-nmap <C-j> <PageDown>
-nmap <C-k> <PageUp>
+"make Y consistent with C and D
+nnoremap Y y$
+
+let g:ragtag_global_maps = 1
+
+"mark syntax errors with :signs
+let g:syntastic_enable_signs=1
+
+"key mapping for vimgrep result navigation
+map <A-o> :copen<CR>
+map <A-q> :cclose<CR>
+map <A-j> :cnext<CR>
+map <A-k> :cprevious<CR>
+
+"autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 "key mapping for window navigation
 map <C-h> <C-w>h
@@ -169,65 +236,37 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+"key mapping for saving file
+nmap <C-s> :w<CR>
+imap <C-s> :w<CR>
+imap <C-j> <ESC><ESC>
+nmap <C-j> <PageDown>
+vmap <C-j> <PageDown>
+nmap <C-k> <PageUp>
+vmap <C-k> <PageUp>
 
-" Слова откуда будем завершать
+imap <c-k> <Plug>snipMateTrigger
+
+" autocomplete
 set complete=""
-" Из текущего буфера
+" current buffer
 set complete+=.
-" Из словаря
+" dictionary
 set complete+=k
-" Из других открытых буферов
+" other open buffers
 set complete+=b
-" из тегов
+" from tags
 set complete+=t
 " other loaded windows
 set complete+=w
 " included files
 set complete+=i
 
-set splitright
-set splitbelow
-" turn terminal to normal mode with escape
-tnoremap <Esc> <C-\><C-n>
-" start terminal in insert mode
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-" open terminal on ctrl+n
-function! OpenTerminal()
-  split term://bash
-  resize 10
-endfunction
-nnoremap <c-n> :call OpenTerminal()<CR>
+" Setting dictionaries for complete
+autocmd FileType python set dictionary=$HOME/.vim/dict/python
+autocmd FileType php set dictionary=$HOME/.vim/dict/php
 
-nnoremap <C-p> :FZF<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \}
-
-"nnoremap <silent> <C-b> :BufExplorerHorizontalSplit<CR>
-nnoremap <silent> <C-b> :BufExplorer<CR>
-
-nmap <F3> :TagbarToggle<CR>
-nmap <F8> :Neoformat<CR>
-
-"let g:deoplete#enable_at_startup = 1
-
-let g:neoformat_basic_format_align = 1
-
-" Enable tab to space conversion
-let g:neoformat_basic_format_retab = 1
-
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
-
-" disable autocompletion, because we use deoplete for completion
-let g:jedi#completions_enabled = 1
-
-" open the go-to function in split, not another buffer
-let g:jedi#use_splits_not_buffers = "right"
-
-
+" mappings for NERDCommenter
 map ,ca           <Plug>NERDCommenterAltDelims
 map ,cu           <Plug>NERDCommenterUncomment
 map ,cb           <Plug>NERDCommenterAlignBoth
@@ -241,150 +280,133 @@ map ,cm           <Plug>NERDCommenterMinimal
 map ,c<Space>     <Plug>NERDCommenterToggle
 map ,cc           <Plug>NERDCommenterComment
 
+" hide files in NERDTree
+nnoremap <silent> <C-f> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$', '\.class$']
 
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline_theme='dark'
-let g:airline_enable_fugitive=1
-let g:airline_enable_syntastic=1
-let g:airline_enable_bufferline=1
-"let g:airline_left_sep = '▶'
-"let g:airline_right_sep = '◀'
-let g:airline_linecolumn_prefix = '¶ '
-let g:airline_fugitive_prefix = '⎇ '
-let g:airline_paste_symbol = 'ρ'
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКІЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкіегмцчня;abcdefghijklmnopqrstuvwxyz
 
-"let g:airline_section_b = '%{fugitive#head()}'
-let g:airline_section_c = '%t'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
-" Coc nvim
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" Auto close pairs
+"inoremap " ""<left>
+"inoremap ' ''<left>
+"inoremap ` `` <left>
+"inoremap ( ()<left>
+"inoremap [ []<left>
+"inoremap { {}<left>
+"inoremap {<CR> {<CR>}<ESC>O
+"inoremap {;<CR> {<CR>};<ESC>O
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" PHP settings
+" checking php synax
+set makeprg=php\ -l\ %
 
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+" Error format
+set errorformat=%m\ in\ %f\ on\ line\ %l
+
+let g:pdv_cfg_Uses = 1
+let php_folding = 1
+let php_noShortTags = 0
+let php_sql_query=1
+let php_htmlInStrings=1
+let php_baselib = 1"
+
+" If you use php-cs-fixer version 1.x
+let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
+let g:php_cs_fixer_config = "default"                  " options: --config
+" If you want to define specific fixers:
+"let g:php_cs_fixer_fixers_list = "linefeed,short_tag" " options: --fixers
+
+" If you use php-cs-fixer version 2.x
+let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
+"let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
+"let g:php_cs_fixer_config_file = '.php_cs' " options: --config
+let g:php_cs_fixer_allow_risky = "yes"      " options: --allow-risky
+" End of php-cs-fixer version 2 config params
+
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
+" let g:php_cs_fixer_ignore_env = 1               " Ignoring any environment requirements
+
+
+"jump to last cursor position when opening a file
+"dont do it when writing a commit log entry
+autocmd BufReadPost * call SetCursorPosition()
+function! SetCursorPosition()
+    if &filetype !~ 'commit\c'
+        if line("'\"") > 0 && line("'\"") <= line("$")
+            exe "normal! g`\""
+            normal! zz
+        endif
+    end
 endfunction
 
-" Use <c-space> to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
+" Strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
 endfunction
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" Blade syntax highlighting as HTML
+"augroup filetypedetect
+  "au! BufRead,BufNewFile *.blade.php     setfiletype html
+"augroup END
 
-" Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" Autocopmlete html tags
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.blade.php'
 
-augroup mygroup
-  autocmd!
-  "" Setup formatexpr specified filetype(s)
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  "" Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 
-" Applying code actions to the selected code block
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
 
-" Remap keys for applying code actions at the cursor position
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-" Remap keys for apply code actions affect whole buffer
-nmap <leader>as  <Plug>(coc-codeaction-source)
-" Apply the most preferred quickfix action to fix diagnostic on the current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
 
-" Remap keys for applying refactor code actions
-nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
-xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
 
-" Run the Code Lens action on the current line
-nmap <leader>cl  <Plug>(coc-codelens-action)
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
 
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
 
-" Use CTRL-S for selections ranges
-" Requires 'textDocument/selectionRange' support of language server
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer
-command! -nargs=0 Format :call CocActionAsync('format')
-
-" Add `:Fold` command to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer
-command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-" Show all diagnostics
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
