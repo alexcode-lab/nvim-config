@@ -19,10 +19,12 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'LunarWatcher/auto-pairs'          " Auto close brackets
 Plug 'sbdchd/neoformat'                 " code auto format
+Plug 'sheerun/vim-polyglot'
 
+Plug 'czheo/mojo.vim'
 
 " Python syntax highlight
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
+Plug 'wookayin/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 
 " ###########
 "
@@ -52,7 +54,7 @@ syntax on
 set encoding=utf-8
 
 set background=dark
-colorscheme neverland2-darker
+colorscheme neverland
 
 " temprorary files
 set backup
@@ -211,7 +213,7 @@ map <C-l> <C-w>l
 "key mapping for saving file
 nmap <C-s> :w<CR>
 imap <C-s> :w<CR>
-imap <C-j> <ESC><ESC>
+imap <C-j> <ESC>
 nmap <C-j> <PageDown>
 vmap <C-j> <PageDown>
 nmap <C-k> <PageUp>
@@ -335,9 +337,8 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Blade syntax highlighting as HTML
 "augroup filetypedetect
-  "au! BufRead,BufNewFile *.blade.php     setfiletype html
+  "au! BufRead,BufNewFile *.blade.php set filetype=html
 "augroup END
-
 
 " Autocopmlete html tags
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -387,3 +388,6 @@ let g:closetag_close_shortcut = '<leader>>'
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases.php = 'php, html'
+
+" Comment support for mojo
+let g:NERDCustomDelimiters = {'mojo': { 'left': '#'}}
