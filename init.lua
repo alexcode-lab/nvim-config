@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -598,6 +598,7 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         pyright = {},
+        phpactor = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -691,7 +692,16 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require('nvim-tree').setup {
+        filters = {
+          dotfiles = true,
+        },
+      }
+    end,
+  },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -727,6 +737,27 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      {
+        'uga-rosa/cmp-dictionary',
+        config = function()
+          local dict = {
+            ['php'] = { '~/.config/nvim/dict/php' },
+            ['python'] = { '~/.config/nvim/dict/python' },
+          }
+          require('cmp_dictionary').setup {
+            exact_length = 2,
+            first_case_insensitive = true,
+          }
+          vim.api.nvim_create_autocmd('BufEnter', {
+            callback = function(ev)
+              local filetype = vim.bo[ev.buf].filetype
+              require('cmp_dictionary').setup {
+                paths = dict[filetype] or {},
+              }
+            end,
+          })
+        end,
+      },
     },
     config = function()
       -- See `:help cmp`
@@ -798,6 +829,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'dictionary' },
         },
       }
     end,
@@ -865,7 +897,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'php', 'python' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -940,5 +972,6 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- Custom settings
 require 'custom.plugins.settings'
 require 'custom.plugins.keymaps'

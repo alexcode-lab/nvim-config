@@ -9,3 +9,9 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
+
+vim.cmd [[
+  autocmd BufRead,BufNewFile *.blade.php set filetype=html
+  autocmd FileType python set dictionary=$HOME/.config/nvim/dict/python
+  autocmd FileType php set dictionary=$HOME/.config/nvim/dict/php
+]]
