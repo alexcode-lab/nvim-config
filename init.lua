@@ -120,6 +120,7 @@ vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
+vim.opt.undodir = vim.fn.expand '~/.undodir'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -216,6 +217,11 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+end
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -241,6 +247,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
+  'github/copilot.vim',
   {
     'numToStr/Comment.nvim',
     opts = {
@@ -437,7 +444,6 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -655,6 +661,7 @@ require('lazy').setup({
       }
     end,
   },
+  { 'mbbill/undotree' },
 
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -750,6 +757,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-omni',
       {
         'uga-rosa/cmp-dictionary',
         config = function()
@@ -771,6 +779,7 @@ require('lazy').setup({
           })
         end,
       },
+      'hrsh7th/cmp-buffer',
     },
     config = function()
       -- See `:help cmp`
@@ -784,70 +793,63 @@ require('lazy').setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
-
+        completion = {
+          -- autocomplete = true,
+          completeopt = 'menu,menuone,noinsert',
+        },
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        mapping = cmp.mapping.preset.insert {
+        mapping = {
+          --[[ ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }), ]]
           -- Select the [n]ext item
           ['<C-n>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
           ['<C-p>'] = cmp.mapping.select_prev_item(),
 
-          -- Scroll the documentation window [b]ack / [f]orward
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+          ['<C-e>'] = cmp.mapping {
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+          },
 
-          -- Accept ([y]es) the completion.
-          --  This will auto-import if your LSP supports it.
-          --  This will expand snippets if the LSP sent a snippet.
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          -- ['<C-j>'] = cmp.mapping.confirm { select = true },
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-          -- If you prefer more traditional completion keymaps,
-          -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-          -- Manually trigger a completion from nvim-cmp.
-          --  Generally you don't need this, because nvim-cmp will display
-          --  completions whenever it has completion options available.
-          ['<C-Space>'] = cmp.mapping.complete {},
-
-          -- Think of <c-l> as moving to the right of your snippet expansion.
-          --  So if you have a snippet that's like:
-          --  function $name($args)
-          --    $body
-          --  end
-          --
-          -- <c-l> will move you to the right of each of the expansion locations.
-          -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
-
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
           { name = 'nvim_lsp' },
+          { name = 'buffer' },
+          { name = 'dictionary' },
           { name = 'luasnip' },
           { name = 'path' },
-          { name = 'dictionary' },
+          { name = 'tags' },
+          { name = 'omni', option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } } },
         },
       }
     end,
   },
-
+  { 'rebelot/kanagawa.nvim' },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -904,6 +906,45 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+    end,
+  },
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local harpoon = require 'harpoon'
+      harpoon:setup()
+      vim.keymap.set('n', '<leader>a', function()
+        harpoon:list():add()
+      end)
+      vim.keymap.set('n', '<C-h>', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end)
+
+      vim.keymap.set('n', '1', function()
+        harpoon:list():select(1)
+      end)
+      vim.keymap.set('n', '2', function()
+        harpoon:list():select(2)
+      end)
+      vim.keymap.set('n', '3', function()
+        harpoon:list():select(3)
+      end)
+      vim.keymap.set('n', '4', function()
+        harpoon:list():select(4)
+      end)
+      vim.keymap.set('n', '5', function()
+        harpoon:list():select(4)
+      end)
+
+      -- Toggle previous & next buffers stored within Harpoon list
+      vim.keymap.set('n', '<C-p>', function()
+        harpoon:list():prev()
+      end)
+      vim.keymap.set('n', '<C-n>', function()
+        harpoon:list():next()
+      end)
     end,
   },
   { -- Highlight, edit, and navigate code
