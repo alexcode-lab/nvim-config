@@ -102,7 +102,7 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -269,7 +269,7 @@ require('lazy').setup({
         ---Add comment on the line below
         below = ',co',
         ---Add comment at the end of line
-        eol = ',cA',
+        eol = ',ca',
       },
     },
   },
@@ -412,9 +412,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = '[F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = '[G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
@@ -591,6 +593,21 @@ require('lazy').setup({
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      local lspconfig = require 'lspconfig'
+      lspconfig.gopls.setup {
+        cmd = { 'gopls' },
+        filetypes = { 'go', 'gomod' },
+        root_dir = lspconfig.util.root_pattern('go.work', 'go.mod', '.git'),
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+      }
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -602,7 +619,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        -- gopls = { },
         pyright = {},
         phpactor = {},
         -- rust_analyzer = {},
@@ -668,7 +685,7 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<F8>',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
@@ -691,12 +708,16 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'autopep8' },
-        php = { 'php-cs-fixer', 'ecs' },
+        php = { 'php' },
       },
       formatters = {
-        ['php-cs-fixer'] = {
+        php = {
           command = 'php-cs-fixer',
-          args = { 'fix', '--using-cache=no', '--quiet', '--diff', '--allow-risky=yes', '-' },
+          args = {
+            'fix',
+            '$FILENAME',
+          },
+          stdin = false,
         },
       },
     },
@@ -861,7 +882,6 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -914,10 +934,15 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local harpoon = require 'harpoon'
-      harpoon:setup()
+      harpoon:setup {
+        settings = {
+          save_on_toggle = true,
+        },
+      }
       vim.keymap.set('n', '<leader>a', function()
-        harpoon:list():add()
-      end)
+        local res = harpoon:list():add()
+        print('Added as: ' .. res._length)
+      end, { desc = '[A]dd file to harpoon' })
       vim.keymap.set('n', '<C-h>', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end)
@@ -951,7 +976,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'php', 'python' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'php', 'python', 'go' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1023,6 +1048,8 @@ require('lazy').setup({
     },
   },
 })
+
+vim.cmd.colorscheme 'tokyonight-night'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
