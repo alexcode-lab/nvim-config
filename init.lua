@@ -186,10 +186,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -383,18 +383,21 @@ require('lazy').setup({
       -- This opens a window that shows you all of the keymaps for the current
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
-
+      local actions = require 'telescope.actions'
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = {
+              ['<c-j>'] = actions.close,
+              ['<esc>'] = actions.close,
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -690,7 +693,7 @@ require('lazy').setup({
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = '[F8] format buffer',
       },
     },
     opts = {
@@ -739,6 +742,16 @@ require('lazy').setup({
       require('nvim-tree').setup {
         filters = {
           dotfiles = true,
+        },
+        renderer = {
+          icons = {
+            show = {
+              file = true,
+              folder = true,
+              folder_arrow = false,
+              git = true,
+            },
+          },
         },
       }
     end,
@@ -855,7 +868,6 @@ require('lazy').setup({
           },
 
           ['<CR>'] = cmp.mapping.confirm { select = true },
-          -- ['<C-j>'] = cmp.mapping.confirm { select = true },
           ['<C-y>'] = cmp.mapping.confirm { select = true },
         },
         sources = {
@@ -871,6 +883,8 @@ require('lazy').setup({
     end,
   },
   { 'rebelot/kanagawa.nvim' },
+  { 'tanvirtin/monokai.nvim' },
+  { 'navarasu/onedark.nvim' },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -946,22 +960,25 @@ require('lazy').setup({
       vim.keymap.set('n', '<C-h>', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end)
+      vim.keymap.set('n', '<leader>h', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end)
 
-      vim.keymap.set('n', '1', function()
+      vim.keymap.set('n', '<leader>1', function()
         harpoon:list():select(1)
-      end)
-      vim.keymap.set('n', '2', function()
+      end, { desc = 'Open [1] harpoon file' })
+      vim.keymap.set('n', '<leader>2', function()
         harpoon:list():select(2)
-      end)
-      vim.keymap.set('n', '3', function()
+      end, { desc = 'Open [2] harpoon file' })
+      vim.keymap.set('n', '<leader>3', function()
         harpoon:list():select(3)
-      end)
-      vim.keymap.set('n', '4', function()
+      end, { desc = 'Open [3] harpoon file' })
+      vim.keymap.set('n', '<leader>4', function()
         harpoon:list():select(4)
-      end)
-      vim.keymap.set('n', '5', function()
+      end, { desc = 'Open [4] harpoon file' })
+      vim.keymap.set('n', '<leader>5', function()
         harpoon:list():select(4)
-      end)
+      end, { desc = 'Open [5] harpoon file' })
 
       -- Toggle previous & next buffers stored within Harpoon list
       vim.keymap.set('n', '<C-p>', function()
@@ -1049,7 +1066,7 @@ require('lazy').setup({
   },
 })
 
-vim.cmd.colorscheme 'tokyonight-night'
+vim.cmd.colorscheme 'kanagawa'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
