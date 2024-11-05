@@ -15,3 +15,9 @@ vim.cmd [[
   autocmd FileType python set dictionary=$HOME/.config/nvim/dict/python
   autocmd FileType php set dictionary=$HOME/.config/nvim/dict/php
 ]]
+
+-- Set the number of spaces that a <Tab> character occupies
+vim.opt.tabstop = 4
+
+-- Set the number of spaces to use for each step of (auto)indent
+vim.opt.shiftwidth = 4

@@ -247,7 +247,6 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  'github/copilot.vim',
   {
     'numToStr/Comment.nvim',
     opts = {
@@ -273,6 +272,7 @@ require('lazy').setup({
       },
     },
   },
+  -- 'github/copilot.vim',
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -286,18 +286,18 @@ require('lazy').setup({
   --    require('gitsigns').setup({ ... })
   --
   -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
+  -- { -- Adds git related signs to the gutter, as well as utilities for managing changes
+  --   'lewis6991/gitsigns.nvim',
+  --   opts = {
+  --     signs = {
+  --       add = { text = '+' },
+  --       change = { text = '~' },
+  --       delete = { text = '_' },
+  --       topdelete = { text = '‾' },
+  --       changedelete = { text = '~' },
+  --     },
+  --   },
+  -- },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -398,7 +398,12 @@ require('lazy').setup({
             },
           },
         },
-        -- pickers = {}
+        pickers = {
+          buffers = {
+            sort_lastused = true,
+            ignore_current_buffer = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -607,6 +612,7 @@ require('lazy').setup({
               unusedparams = true,
             },
             staticcheck = true,
+            experimentalWorkspaceModule = true,
           },
         },
       }
@@ -884,7 +890,6 @@ require('lazy').setup({
   },
   { 'rebelot/kanagawa.nvim' },
   { 'tanvirtin/monokai.nvim' },
-  { 'navarasu/onedark.nvim' },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
