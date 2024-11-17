@@ -14,6 +14,7 @@ vim.cmd [[
   autocmd BufRead,BufNewFile *.blade.php set filetype=html
   autocmd FileType python set dictionary=$HOME/.config/nvim/dict/python
   autocmd FileType php set dictionary=$HOME/.config/nvim/dict/php
+  autocmd FileType make setlocal noexpandtab shiftwidth=4 softtabstop=0 expandtab=false
 ]]
 
 -- Set the number of spaces that a <Tab> character occupies
