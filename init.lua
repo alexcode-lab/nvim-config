@@ -616,6 +616,17 @@ require('lazy').setup({
           },
         },
       }
+      lspconfig.ts_ls.setup {
+        on_attach = function(client, bufnr)
+          -- Keybindings for LSP (optional)
+          local bufopts = { noremap = true, silent = true, buffer = bufnr }
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+          vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+        end,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      }
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -628,18 +639,15 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = { },
         pyright = {},
         phpactor = {},
         rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-        --
+        solidity = {
+          cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
+          filetypes = { 'solidity' },
+          root_dir = require('lspconfig.util').find_git_ancestor,
+          single_file_support = true,
+        },
 
         lua_ls = {
           -- cmd = {...},
