@@ -9,12 +9,12 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
-
 vim.cmd [[
+  autocmd BufRead,BufNewFile Makefile set filetype=make
   autocmd BufRead,BufNewFile *.blade.php set filetype=html
   autocmd FileType python set dictionary=$HOME/.config/nvim/dict/python
   autocmd FileType php set dictionary=$HOME/.config/nvim/dict/php
-  autocmd FileType make setlocal noexpandtab shiftwidth=4 softtabstop=0
+  autocmd FileType make setlocal noexpandtab shiftwidth=4 softtabstop=0 
   autocmd FileType nim setlocal noexpandtab shiftwidth=4 softtabstop=0
 ]]
 
@@ -23,3 +23,15 @@ vim.opt.tabstop = 4
 
 -- Set the number of spaces to use for each step of (auto)indent
 vim.opt.shiftwidth = 4
+
+-- NOTE: Not sure if it needed
+--
+-- Set tab-specific settings for Makefiles
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'make',
+--   callback = function()
+--     vim.opt_local.expandtab = false -- Use tabs, not spaces
+--     vim.opt_local.shiftwidth = 4 -- Set tab width to 8 spaces
+--     vim.opt_local.softtabstop = 0 -- Disable space-to-tab conversion
+--   end,
+-- })
