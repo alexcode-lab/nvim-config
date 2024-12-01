@@ -624,27 +624,6 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-omni',
-      {
-        'uga-rosa/cmp-dictionary',
-        config = function()
-          local dict = {
-            ['php'] = { '~/.config/nvim/dict/php' },
-            ['python'] = { '~/.config/nvim/dict/python' },
-          }
-          require('cmp_dictionary').setup {
-            exact_length = 2,
-            first_case_insensitive = true,
-          }
-          vim.api.nvim_create_autocmd('BufEnter', {
-            callback = function(ev)
-              local filetype = vim.bo[ev.buf].filetype
-              require('cmp_dictionary').setup {
-                paths = dict[filetype] or {},
-              }
-            end,
-          })
-        end,
-      },
       'hrsh7th/cmp-buffer',
     },
     config = function()
@@ -705,7 +684,7 @@ require('lazy').setup({
         sources = {
           { name = 'nvim_lsp' },
           { name = 'buffer' },
-          { name = 'dictionary' },
+          -- { name = 'dictionary' },
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'tags' },

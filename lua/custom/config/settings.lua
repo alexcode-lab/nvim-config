@@ -12,8 +12,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 vim.cmd [[
   autocmd BufRead,BufNewFile Makefile set filetype=make
   autocmd BufRead,BufNewFile *.blade.php set filetype=html
-  autocmd FileType python set dictionary=$HOME/.config/nvim/dict/python
-  autocmd FileType php set dictionary=$HOME/.config/nvim/dict/php
   autocmd FileType make setlocal noexpandtab shiftwidth=4 softtabstop=0 
   autocmd FileType nim setlocal noexpandtab shiftwidth=4 softtabstop=0
 ]]
