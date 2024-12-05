@@ -1,0 +1,3 @@
+return {
+  'mattn/vim-goaddtags',
+}
