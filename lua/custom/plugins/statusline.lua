@@ -4,7 +4,7 @@ return {
   config = function()
     local colors = {
       bg = '#202328',
-      bgFile = '#24272e',
+      bgDarker = '#24272e',
       fg = '#bbc2cf',
       yellow = '#ECBE7B',
       cyan = '#008080',
@@ -39,7 +39,11 @@ return {
           {
             'branch',
             icon = ' ',
-            color = { fg = colors.violet, gui = 'bold' },
+            color = {
+              fg = colors.violet,
+              bg = colors.bgDarker,
+              gui = 'bold',
+            },
           },
           {
             'filename',
@@ -47,12 +51,13 @@ return {
             path = 1,
             color = {
               fg = colors.fg,
-              bg = colors.bgFile,
               -- gui = 'bold',
             },
           },
         },
         lualine_c = {
+          'searchcount',
+          'selectioncount',
           {
             'diagnostics',
             -- symbols = { error = ' ', warn = ' ', info = ' ' },
@@ -62,8 +67,6 @@ return {
               info = { fg = colors.cyan },
             },
           },
-          'searchcount',
-          'selectioncount',
         },
         lualine_x = {
           {
