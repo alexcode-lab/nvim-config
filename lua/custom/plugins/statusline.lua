@@ -34,8 +34,8 @@ return {
         },
       },
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = {
+        lualine_a = {
+          'mode',
           {
             'branch',
             icon = ' ',
@@ -45,14 +45,18 @@ return {
               gui = 'bold',
             },
           },
+        },
+        lualine_b = {
           {
             'filename',
-            icon = '',
             path = 1,
             color = {
               fg = colors.fg,
               -- gui = 'bold',
             },
+            file_status = true,
+            newfile_status = true,
+            shorting_target = 40,
           },
         },
         lualine_c = {
@@ -60,7 +64,7 @@ return {
           'selectioncount',
           {
             'diagnostics',
-            -- symbols = { error = ' ', warn = ' ', info = ' ' },
+            sources = { 'nvim_diagnostic', 'coc' },
             diagnostics_color = {
               error = { fg = colors.red },
               warn = { fg = colors.yellow },
@@ -71,17 +75,16 @@ return {
         lualine_x = {
           {
             'diff',
-            symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+            symbols = { added = '+', modified = '~', removed = '-' },
             diff_color = {
               added = { fg = colors.green },
               modified = { fg = colors.orange },
               removed = { fg = colors.red },
             },
           },
-          {
-            'filesize',
-            color = {},
-          },
+          'progress',
+          'location',
+          'filesize',
           {
             'encoding',
             color = {
@@ -97,8 +100,13 @@ return {
           },
           'filetype',
         },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' },
+        lualine_y = {},
+        lualine_z = {
+          {
+            'datetime',
+            style = '%H:%M',
+          },
+        },
       },
       tabline = {},
       winbar = {},
