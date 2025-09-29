@@ -102,10 +102,10 @@ return {
         },
         lualine_y = {},
         lualine_z = {
-          {
-            'datetime',
-            style = '%H:%M',
-          },
+          -- {
+          --   'datetime',
+          --   style = '%H:%M',
+          -- },
         },
       },
       tabline = {},

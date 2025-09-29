@@ -462,28 +462,38 @@ require('lazy').setup {
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
-      local lspconfig = require 'lspconfig'
-      lspconfig.gopls.setup {
-        cmd = { 'gopls' },
-        filetypes = { 'go', 'gomod' },
-        root_dir = lspconfig.util.root_pattern('go.work', 'go.mod', '.git'),
-        settings = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-            staticcheck = true,
-            experimentalWorkspaceModule = true,
-          },
-        },
-      }
-      lspconfig.ts_ls.setup {
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
-      }
-      lspconfig.ols.setup {}
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      --
+      -- local lspconfig = require 'lspconfig'
+      -- lspconfig.gopls.setup {
+      --   cmd = { 'gopls' },
+      --   filetypes = { 'go', 'gomod' },
+      --   root_dir = lspconfig.util.root_pattern('go.work', 'go.mod', '.git'),
+      --   settings = {
+      --     gopls = {
+      --       analyses = {
+      --         unusedparams = true,
+      --       },
+      --       staticcheck = true,
+      --       experimentalWorkspaceModule = true,
+      --     },
+      --   },
+      -- }
+      -- lspconfig.ts_ls.setup {
+      --   capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      -- }
+      -- lspconfig.ols.setup {}
+      --
+      -- lspconfig.lua_ls.setup {
+      --   settings = {
+      --     Lua = {
+      --       diagnostics = {
+      --         globals = { 'vim' },
+      --       },
+      --     },
+      --   },
+      -- }
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -497,7 +507,7 @@ require('lazy').setup {
       local servers = {
         -- clangd = {},
         pyright = {},
-        phpactor = {},
+        intelephense = {},
         rust_analyzer = {},
         -- solidity = {
         --   cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
@@ -505,20 +515,6 @@ require('lazy').setup {
         --   root_dir = require('lspconfig.util').find_git_ancestor,
         --   single_file_support = true,
         -- },
-
-        lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            },
-          },
-        },
       }
 
       -- Ensure the servers and tools above are installed
