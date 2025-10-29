@@ -16,7 +16,7 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -315,8 +315,8 @@ require('lazy').setup {
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -505,10 +505,19 @@ require('lazy').setup {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        lua_ls = {
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { 'vim' }, -- let the server know "vim" exists
+              },
+            },
+          },
+        },
         pyright = {},
         intelephense = {},
-        rust_analyzer = {},
+        gopls = {},
+        -- rust_analyzer = {},
         -- solidity = {
         --   cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
         --   filetypes = { 'solidity' },
@@ -542,7 +551,8 @@ require('lazy').setup {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            -- require('lspconfig')[server_name].setup(server)
+            vim.lsp.config[server_name].setup(server)
           end,
         },
       }
@@ -697,9 +707,6 @@ require('lazy').setup {
       }
     end,
   },
-  { 'rebelot/kanagawa.nvim' },
-  -- { 'tanvirtin/monokai.nvim' },
-  -- { 'folke/tokyonight.nvim' },
 
   -- Highlight todo, notes, etc in comments
   {
@@ -761,8 +768,10 @@ require('lazy').setup {
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
-  { 'tanvirtin/monokai.nvim' },
+
+  { 'rebelot/kanagawa.nvim' },
   { 'folke/tokyonight.nvim' },
+  { 'xeind/nightingale.nvim' },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
