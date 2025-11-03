@@ -147,6 +147,7 @@ require('lazy').setup {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
   { 'mbbill/undotree' },
+
   { 'rebelot/kanagawa.nvim' },
   { 'folke/tokyonight.nvim' },
   { 'xeind/nightingale.nvim' },
@@ -179,3 +180,4 @@ vim.cmd.colorscheme 'kanagawa'
 -- Custom settings
 require 'custom.config.settings'
 require 'custom.config.keymaps'
+require 'custom.config.marks'
