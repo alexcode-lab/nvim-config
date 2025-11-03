@@ -29,6 +29,8 @@ return { -- Autoformat
       php = { 'php' },
       yaml = { 'prettier' },
       go = { name = 'gopls', timeout_ms = 500, lsp_format = 'prefer' },
+      json = { 'fixjson' },
+      html = { 'prettier' },
     },
     formatters = {
       php = {

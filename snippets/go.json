@@ -1,7 +1,7 @@
 {
-    "test": {
-        "prefix": "test1",
-        "body": "Test1 \"${1:name}\"",
-        "description": "Test snippet"
-    }
+  "test": {
+    "prefix": "test1",
+    "body": "Test1 \"${1:name}\"",
+    "description": "Test snippet"
+  }
 }
