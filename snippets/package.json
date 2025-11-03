@@ -1,0 +1,22 @@
+{
+  "contributes": {
+    "snippets": [
+      {
+        "language": "go",
+        "path": "./go.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./javascript.json"
+      },
+      {
+        "language": "php",
+        "path": "./php.json"
+      },
+      {
+        "language": "python",
+        "path": "./python.json"
+      }
+    ]
+  }
+}
