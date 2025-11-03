@@ -27,16 +27,8 @@ return { -- Autoformat
       lua = { 'stylua' },
       python = { 'autopep8' },
       php = { 'php' },
-    },
-    formatters = {
-      php = {
-        command = 'php-cs-fixer',
-        args = {
-          'fix',
-          '$FILENAME',
-        },
-        stdin = false,
-      },
+      yaml = { 'prettier' },
+      go = { name = 'gopls', timeout_ms = 500, lsp_format = 'prefer' },
     },
   },
 }
