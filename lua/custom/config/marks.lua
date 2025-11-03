@@ -1,8 +1,6 @@
 -- Borrowed from https://github.com/lewis6991/dotfiles/blob/0071d6f1a97f8f6080eb592c4838d92f77901e84/config/nvim/lua/gizmos/marksigns.lua
 
--- local ns = vim.api.nvim_create_namespace '/marks'
-local ns_name = '/marks/' .. vim.fn.getcwd():gsub('/', '_')
-local ns = vim.api.nvim_create_namespace(ns_name)
+local ns = vim.api.nvim_create_namespace '/marks'
 
 ---@param bufnr integer
 ---@param mark vim.fn.getmarklist.ret.item
