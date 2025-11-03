@@ -1,6 +1,6 @@
 vim.keymap.set('i', '<C-j>', '<ESC>', { desc = 'Exit from insert mode' })
-vim.keymap.set('n', '<C-j>', '<PageDown>', { desc = 'Page down' })
-vim.keymap.set('n', '<C-k>', '<PageUp>', { desc = 'Page up' })
+vim.keymap.set({ 'n', 'v' }, '<C-j>', '<PageDown>', { desc = 'Page down' })
+vim.keymap.set({ 'n', 'v' }, '<C-k>', '<PageUp>', { desc = 'Page up' })
 vim.keymap.set({ 'n', 'v', 'i' }, '<C-f>', '<ESC>:NvimTreeToggle<CR>', { desc = 'Toggle Nvim [F]ile tree' })
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle [U]ndo tree' })
 vim.keymap.set('n', '<F4>', vim.cmd.vsplit, { desc = 'Split verticaly' })
