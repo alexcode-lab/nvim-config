@@ -60,6 +60,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
         buffers = {
           sort_lastused = true,
           ignore_current_buffer = true,
+          mappings = {
+            i = {
+              ['<C-d>'] = 'delete_buffer', -- delete in insert mode
+            },
+          },
         },
       },
       extensions = {

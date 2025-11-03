@@ -299,7 +299,7 @@ set cpo&vim
 
 " Location of the grep utility
 if !exists("Grep_Path")
-    let Grep_Path = 'grep'
+    let Grep_Path = 'rg'
 endif
 
 " Location of the fgrep utility
@@ -484,7 +484,7 @@ function! s:RunGrepRecursive(cmd_name, grep_cmd, action, ...)
         let grep_opt = grep_opt . " -s"
     endif
 
-    if a:grep_cmd == 'grep'
+    if a:grep_cmd == 'rg'
         let grep_path = g:Grep_Path
         let grep_expr_option = '--'
     elseif a:grep_cmd == 'fgrep'

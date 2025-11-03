@@ -11,12 +11,12 @@ return {
         auto_trigger = true,
         debounce = 75,
         keymap = {
-          accept = '<C-l>', -- your custom keybinding
+          accept = '<C-l>',
+          dismiss = '<C-k>',
           accept_word = false, -- disable default keymaps you don't use
           accept_line = false,
           next = '<M-n>',
           prev = '<M-p>',
-          dismiss = '<C-]>',
         },
       },
       filetypes = {

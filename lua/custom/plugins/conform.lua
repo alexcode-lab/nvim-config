@@ -30,5 +30,15 @@ return { -- Autoformat
       yaml = { 'prettier' },
       go = { name = 'gopls', timeout_ms = 500, lsp_format = 'prefer' },
     },
+    formatters = {
+      php = {
+        command = 'php-cs-fixer',
+        args = {
+          'fix',
+          '$FILENAME',
+        },
+        stdin = false,
+      },
+    },
   },
 }
