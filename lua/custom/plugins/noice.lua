@@ -2,14 +2,14 @@ return {
   'folke/noice.nvim',
   event = 'VeryLazy',
   opts = {
-    routes = {
-      {
-        filter = { event = 'notify', find = 'No information available' },
-        opts = { skip = true },
-      },
-    },
     presets = {
       lsp_doc_border = true,
+    },
+    cmdline = {
+      format = {
+        search_down = { kind = 'search', pattern = '^/', icon = '  ', lang = 'regex' },
+        search_up = { kind = 'search', pattern = '^%?', icon = '  ', lang = 'regex' },
+      },
     },
   },
   dependencies = {

@@ -42,7 +42,6 @@ return {
             color = {
               fg = colors.violet,
               bg = colors.bgDarker,
-              gui = 'bold',
             },
           },
         },
@@ -52,11 +51,16 @@ return {
             path = 1,
             color = {
               fg = colors.fg,
-              -- gui = 'bold',
             },
             file_status = true,
             newfile_status = true,
             shorting_target = 40,
+            symbols = {
+              modified = '[+]', -- Text to show when the file is modified.
+              readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
+              unnamed = '[No Name]', -- Text to show for unnamed buffers.
+              newfile = '[New]', -- Text to show for newly created file before first write
+            },
           },
         },
         lualine_c = {
@@ -64,7 +68,7 @@ return {
           'selectioncount',
           {
             'diagnostics',
-            sources = { 'nvim_diagnostic', 'coc' },
+            sources = { 'nvim_diagnostic', 'coc', 'nvim_lsp' },
             diagnostics_color = {
               error = { fg = colors.red },
               warn = { fg = colors.yellow },
@@ -89,16 +93,18 @@ return {
             'encoding',
             color = {
               fg = colors.green,
-              gui = 'bold',
             },
+            show_bomb = true,
           },
           {
             'fileformat',
             fmt = string.upper,
             icons_enabled = false,
-            color = { fg = colors.fg, gui = 'bold' },
+            color = { fg = colors.fg },
           },
-          'filetype',
+          {
+            'filetype',
+          },
         },
         lualine_y = {},
         lualine_z = {
