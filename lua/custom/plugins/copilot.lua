@@ -11,8 +11,8 @@ return {
         auto_trigger = true,
         debounce = 75,
         keymap = {
-          accept = '<C-l>',
-          dismiss = '<C-k>',
+          accept = '<M-l>',
+          dismiss = '<M-k>',
           accept_word = false, -- disable default keymaps you don't use
           accept_line = false,
           next = '<M-n>',

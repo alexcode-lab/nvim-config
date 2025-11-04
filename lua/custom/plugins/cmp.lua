@@ -28,13 +28,20 @@ return {
   config = function()
     -- See `:help cmp`
     local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-    luasnip.config.setup {}
+    local ls = require 'luasnip'
+    ls.config.setup {}
+
+    vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+      ls.jump(1)
+    end, { silent = true })
+    vim.keymap.set({ 'i', 's' }, '<C-h>', function()
+      ls.jump(-1)
+    end, { silent = true })
 
     cmp.setup {
       snippet = {
         expand = function(args)
-          luasnip.lsp_expand(args.body)
+          ls.lsp_expand(args.body)
         end,
       },
       completion = {
