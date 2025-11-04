@@ -5,5 +5,5 @@ vim.keymap.set({ 'n', 'v', 'i' }, '<C-f>', '<cmd>NvimTreeToggle<CR>', { desc = '
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle [U]ndo tree' })
 vim.keymap.set('n', '<F4>', vim.cmd.vsplit, { desc = 'Split verticaly' })
 vim.keymap.set({ 'n', 'v' }, '<F9>', '<cmd>split<CR><cmd>resize 15<CR><cmd>terminal<CR>i', { desc = '[F9] Open Terminal' })
-vim.keymap.set({ 'n', 'v' }, '<F10>', '<cmd>bd!<CR>', { desc = '[F10] Close window' })
-vim.keymap.set({ 'n', 'v' }, 'dm', '<cmd>delmarks a-zA-Z0-9<CR>', { desc = 'Delete all marks' })
+vim.keymap.set({ 'n', 'v' }, '<F10>', vim.cmd.close, { desc = '[F10] Close window' })
+vim.keymap.set({ 'n', 'v' }, 'dm', '<cmd>delmarks a-zA-Z0-9 | echo "All marks were cleared!"<CR>', { desc = 'Delete all marks' })
