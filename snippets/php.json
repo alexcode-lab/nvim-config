@@ -1,1 +1,7 @@
-{}
+{
+  "match": {
+    "prefix": "match",
+    "body": "$${1:name} = match($${2:pattern}) {\n\t${3:case1} => ${4:resutl1},\n};",
+    "description": "Match"
+  }
+}
