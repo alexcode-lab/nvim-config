@@ -24,8 +24,8 @@ vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 
 vim.o.autoindent = true
 vim.o.smarttab = true
-vim.o.fileformat = 'unix'
-vim.o.textwidth = 120
+-- vim.o.fileformat = 'unix'
+-- vim.o.textwidth = 120
 
 vim.o.exrc = true
 vim.o.secure = true
