@@ -14,7 +14,7 @@ vim.cmd [[
   autocmd BufRead,BufNewFile *.blade.php set filetype=html
   autocmd FileType make setlocal noexpandtab shiftwidth=4 softtabstop=0 
   autocmd FileType nim setlocal noexpandtab shiftwidth=4 softtabstop=0
-  autocmd FileType php setlocal noexpandtab shiftwidth=4 softtabstop=0
+  " autocmd FileType php setlocal noexpandtab shiftwidth=4 softtabstop=0
 ]]
 
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces

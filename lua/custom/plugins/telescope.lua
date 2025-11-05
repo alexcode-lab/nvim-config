@@ -83,7 +83,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+    vim.keymap.set('n', '<leader>sf', builtin.git_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = '[F]iles' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
@@ -95,8 +95,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<CR>', { desc = '[S]earch [T]todos' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
-    vim.keymap.set('n', '<leader>nd', '<cmd>NoiceDismiss<CR>', { desc = '[D]ismss Noice Message' })
-    vim.keymap.set('n', '<leader>ns', '<cmd>Telescope noice<CR>', { desc = '[S]how Noice Message' })
+    vim.keymap.set('n', '<leader>nd', '<cmd>NoiceDismiss<CR>', { desc = '[D]ismiss Noice Messages' })
+    vim.keymap.set('n', '<leader>ns', '<cmd>Telescope noice<CR>', { desc = '[S]how Noice Messages' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
