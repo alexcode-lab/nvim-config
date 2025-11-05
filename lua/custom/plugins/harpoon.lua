@@ -9,10 +9,10 @@ return {
         save_on_toggle = true,
       },
     }
-    vim.keymap.set('n', '<leader>ha', function()
+    vim.keymap.set('n', '<leader>a', function()
       local res = harpoon:list():add()
       print('Added to harpoon as: ' .. res._length)
-    end, { desc = '[H]arpoon [A]dd file' })
+    end, { desc = '[A]dd file to harpoon' })
 
     vim.keymap.set('n', '<leader>j', function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
