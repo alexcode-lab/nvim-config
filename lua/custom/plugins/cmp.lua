@@ -23,7 +23,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-omni',
+    -- 'hrsh7th/cmp-omni',
     'saadparwaiz1/cmp_luasnip',
   },
   config = function()
@@ -71,10 +71,10 @@ return {
       sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
-        { name = 'luasnip' },
         { name = 'path' },
         { name = 'tags' },
-        { name = 'omni', option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } } },
+        { name = 'luasnip' },
+        -- { name = 'omni', option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } } },
       },
     }
   end,

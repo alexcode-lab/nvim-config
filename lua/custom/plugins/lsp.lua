@@ -2,7 +2,7 @@ return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
-    { 'mason-org/mason.nvim', opts = {} },
+    'mason-org/mason.nvim',
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -167,7 +167,8 @@ return { -- LSP Configuration & Plugins
         },
       },
       pyright = {},
-      phpactor = {},
+      -- phpactor = {},
+      intelephense = {},
       gopls = {},
       -- rust_analyzer = {},
       -- solidity = {
