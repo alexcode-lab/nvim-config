@@ -3,7 +3,9 @@ return {
   event = 'VeryLazy',
   opts = {
     lsp = {
-      signature = { enabled = true }, -- disable signature help popups
+      signature = {
+        enabled = false, -- disable signature help popups
+      },
     },
     presets = {
       lsp_doc_border = true,
