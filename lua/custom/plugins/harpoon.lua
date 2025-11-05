@@ -9,13 +9,14 @@ return {
         save_on_toggle = true,
       },
     }
-    vim.keymap.set('n', '<leader>a', function()
+    vim.keymap.set('n', '<leader>ha', function()
       local res = harpoon:list():add()
       print('Added to harpoon as: ' .. res._length)
-    end, { desc = '[A]dd file to harpoon' })
-    vim.keymap.set('n', '<leader>h', function()
+    end, { desc = '[H]arpoon [A]dd file' })
+
+    vim.keymap.set('n', '<leader>j', function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
-    end)
+    end, { desc = 'Toggle Harpoon menu' })
 
     vim.keymap.set('n', '<leader>1', function()
       harpoon:list():select(1)
@@ -30,7 +31,7 @@ return {
       harpoon:list():select(4)
     end, { desc = 'Open [4] harpoon file' })
     vim.keymap.set('n', '<leader>5', function()
-      harpoon:list():select(4)
+      harpoon:list():select(5)
     end, { desc = 'Open [5] harpoon file' })
 
     -- Toggle previous & next buffers stored within Harpoon list
