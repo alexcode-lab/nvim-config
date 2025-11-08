@@ -1,6 +1,3 @@
--- autopairs
--- https://github.com/windwp/nvim-autopairs
-
 return {
   'cohama/lexima.vim',
   -- 'windwp/nvim-autopairs',

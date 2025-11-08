@@ -11,10 +11,13 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>w', group = '[W]orkspace' },
-      { '<leader>g', group = '[G]olang' },
+      { '<leader>g', group = '[G]olang', icon = '󰟓' },
       -- { '<leader>t', group = '[T]odo' },
-      -- { '<leader>h', group = '[H]arpoon'},
+      { '<leader>j', group = 'Toggle Harpoon' },
       { '<leader>n', group = '[N]oice' },
+
+      { ',j', group = 'Join object' },
+      { ',s', group = 'Split object' },
     }
   end,
 }
