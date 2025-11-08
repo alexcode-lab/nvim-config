@@ -1,5 +1,6 @@
 return {
   'fatih/vim-go',
+  ft = { 'go' },
   init = function()
     -- Set before plugin loads
     vim.g.go_list_type = 'quickfix'
