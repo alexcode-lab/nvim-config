@@ -3,7 +3,6 @@ vim.opt.langmap =
 
 vim.cmd [[
   autocmd BufRead,BufNewFile Makefile set filetype=make
-  autocmd BufRead,BufNewFile *.blade.php set filetype=html
   autocmd FileType make setlocal noexpandtab shiftwidth=4 softtabstop=0 
   autocmd FileType php setlocal autoindent shiftwidth=4 softtabstop=4
 ]]

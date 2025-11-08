@@ -71,6 +71,8 @@ vim.opt.scrolloff = 8
 
 vim.opt.swapfile = false
 
+vim.opt.autowrite = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -149,6 +151,7 @@ require('lazy').setup {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
   { 'mbbill/undotree' },
+  { 'AndrewRadev/splitjoin.vim' },
 
   { 'rebelot/kanagawa.nvim' },
   { 'folke/tokyonight.nvim' },
