@@ -53,6 +53,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ['<c-j>'] = actions.close,
             ['<esc>'] = actions.close,
           },
+          n = {
+            ['<c-j>'] = actions.close,
+          },
         },
       },
       pickers = {
@@ -62,6 +65,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
           mappings = {
             i = {
               ['<C-d>'] = 'delete_buffer', -- delete in insert mode
+            },
+            n = {
+              ['dd'] = 'delete_buffer', -- delete in normal mode
             },
           },
         },

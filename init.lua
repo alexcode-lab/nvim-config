@@ -149,8 +149,8 @@ vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
   { 'mbbill/undotree' },
+  { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
   { 'AndrewRadev/splitjoin.vim' },
 
   { 'rebelot/kanagawa.nvim' },
