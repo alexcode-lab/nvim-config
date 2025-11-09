@@ -167,8 +167,8 @@ return { -- LSP Configuration & Plugins
         },
       },
       pyright = {},
-      -- phpactor = {},
       intelephense = {},
+      -- phpactor = {},
       gopls = {},
       -- rust_analyzer = {},
       -- solidity = {

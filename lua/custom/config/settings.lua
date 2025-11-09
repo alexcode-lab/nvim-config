@@ -14,7 +14,13 @@ vim.o.textwidth = 120
 vim.o.exrc = true
 vim.o.secure = true
 
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.blade.php',
+  command = 'set filetype=html',
+})
+
 -- vim.cmd [[
+--   autocmd BufRead,BufNewFile *.blade.php set filetype=html
 --   autocmd BufRead,BufNewFile Makefile set filetype=make
 --   autocmd FileType make setlocal noexpandtab shiftwidth=4 softtabstop=0
 --   autocmd FileType php setlocal autoindent shiftwidth=4 softtabstop=4 tabstop=4 expandtab autoindent smarttab
