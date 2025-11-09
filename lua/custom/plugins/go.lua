@@ -1,6 +1,5 @@
 return {
   'fatih/vim-go',
-  event = 'VeryLazy',
   ft = { 'go' },
   init = function()
     -- Set before plugin loads
@@ -12,6 +11,7 @@ return {
   end,
   config = function()
     -- Go keymaps
+    vim.keymap.set('n', '<leader>ga', '<cmd>GoAlternate<CR>', { desc = '[G]o to [A]lternate file' })
     vim.keymap.set('n', '<leader>gb', '<cmd>GoBuild<CR>', { desc = '[G]o [B]build' })
     vim.keymap.set('n', '<leader>gr', '<cmd>GoRun<CR>', { desc = '[G]o [R]un' })
     vim.keymap.set('n', '<leader>gt', '<cmd>GoTest<CR>', { desc = '[G]o [T]est' })

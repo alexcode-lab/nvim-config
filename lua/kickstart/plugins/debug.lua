@@ -9,7 +9,7 @@
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  event = 'VeryLazy',
+  -- event = 'VeryLazy',
   ft = { 'go' },
   -- NOTE: And you can specify dependencies as well
   dependencies = {

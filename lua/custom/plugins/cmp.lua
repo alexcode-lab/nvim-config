@@ -22,7 +22,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-cmdline',
+    -- 'hrsh7th/cmp-cmdline', -- NOTE: not sure, autocomplete in command mode working even without it
     'saadparwaiz1/cmp_luasnip',
     -- 'hrsh7th/cmp-omni',
   },
@@ -79,7 +79,7 @@ return {
             end,
           },
         },
-        { name = 'cmdline' },
+        -- { name = 'cmdline' },
         { name = 'path' }, -- autocomplete path
         { name = 'luasnip' },
         -- { name = 'omni', option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } } },
