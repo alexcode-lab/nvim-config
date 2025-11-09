@@ -1,5 +1,6 @@
 return {
   'fatih/vim-go',
+  event = 'VeryLazy',
   ft = { 'go' },
   init = function()
     -- Set before plugin loads
@@ -21,5 +22,6 @@ return {
     vim.keymap.set('n', '<leader>gm', '<cmd>GoMetaLinter<CR>', { desc = '[G]o [M]eta Linter' })
     vim.keymap.set('n', '<leader>gn', '<cmd>GoRename<CR>', { desc = '[G]o Re[N]ame' })
     vim.keymap.set('n', '<leader>gi', '<cmd>GoImpl<CR>', { desc = '[G]o [I]mplement' })
+    vim.keymap.set('n', '<leader>ge', '<cmd>GoIfErr<CR>', { desc = '[G]o If [E]rror' })
   end,
 }

@@ -23,8 +23,8 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
-    -- 'hrsh7th/cmp-omni',
     'saadparwaiz1/cmp_luasnip',
+    -- 'hrsh7th/cmp-omni',
   },
   config = function()
     -- See `:help cmp`
@@ -70,9 +70,17 @@ return {
       },
       sources = {
         { name = 'nvim_lsp' },
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'tags' },
+        {
+          name = 'buffer',
+          option = {
+            get_bufnrs = function()
+              -- Use all listed buffers
+              return vim.api.nvim_list_bufs()
+            end,
+          },
+        },
+        { name = 'cmdline' },
+        { name = 'path' }, -- autocomplete path
         { name = 'luasnip' },
         -- { name = 'omni', option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } } },
       },

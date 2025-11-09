@@ -1,5 +1,6 @@
 return {
   'mattn/vim-goaddtags',
+  event = 'VeryLazy',
   ft = { 'go' },
   config = function()
     -- Go keymaps
