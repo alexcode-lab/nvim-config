@@ -4,7 +4,7 @@ return {
   opts = {},
   keys = {
     {
-      's',
+      'f',
       mode = { 'n', 'x', 'o' },
       function()
         require('flash').jump()
@@ -14,6 +14,11 @@ return {
   },
   config = function()
     require('flash').setup {
+      modes = {
+        search = { enabled = false },
+        char = { enabled = false },
+        treesitter = { enabled = false },
+      },
       highlight = {
         backdrop = false, -- disable graying out everything except matches
       },
