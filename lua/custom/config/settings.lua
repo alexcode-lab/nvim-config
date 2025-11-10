@@ -1,4 +1,4 @@
-vim.opt.langmap =
+vim.o.langmap =
   'ФИСВУАПРШОЛДЬТЩЗЙКІЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкіегмцчня;abcdefghijklmnopqrstuvwxyz'
 
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
