@@ -12,4 +12,11 @@ return {
       desc = 'Flash',
     },
   },
+  config = function()
+    require('flash').setup {
+      highlight = {
+        backdrop = false, -- disable graying out everything except matches
+      },
+    }
+  end,
 }
