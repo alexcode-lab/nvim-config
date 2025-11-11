@@ -103,6 +103,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>nd', '<cmd>NoiceDismiss<CR>', { desc = '[D]ismiss Noice Messages' })
     vim.keymap.set('n', '<leader>ns', '<cmd>Telescope noice<CR>', { desc = '[S]how Noice Messages' })
 
+    vim.keymap.set('n', 'ss', builtin.spell_suggest, { desc = '[S]uggest [S]pell' })
+
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.

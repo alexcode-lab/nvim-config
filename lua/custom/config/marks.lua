@@ -3,7 +3,6 @@
 local ns = vim.api.nvim_create_namespace '/marks'
 
 ---@param bufnr integer
----@param mark vim.fn.getmarklist.ret.item
 local function decor_mark(bufnr, mark)
   pcall(vim.api.nvim_buf_set_extmark, bufnr, ns, mark.pos[2] - 1, 0, {
     sign_text = mark.mark:sub(2),
@@ -59,24 +58,3 @@ vim.on_key(function(_, typed)
     end
   end)
 end, ns)
-
--- use lowercase marks to toggle uppercase marks and vice versa
--- local low = function(i)
---   return string.char(97 + i)
--- end
--- local upp = function(i)
---   return string.char(65 + i)
--- end
---
--- for i = 0, 25 do
---   vim.keymap.set('n', 'm' .. low(i), 'm' .. upp(i))
--- end
--- for i = 0, 25 do
---   vim.keymap.set('n', 'm' .. upp(i), 'm' .. low(i))
--- end
--- for i = 0, 25 do
---   vim.keymap.set('n', "'" .. low(i), "'" .. upp(i))
--- end
--- for i = 0, 25 do
---   vim.keymap.set('n', "'" .. upp(i), "'" .. low(i))
--- end
