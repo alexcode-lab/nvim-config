@@ -59,6 +59,9 @@ return { -- LSP Configuration & Plugins
       update_in_insert = false,
       underline = true,
       severity_sort = true,
+      float = {
+        border = 'rounded',
+      },
     }
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),

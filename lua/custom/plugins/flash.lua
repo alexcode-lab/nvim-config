@@ -22,6 +22,10 @@ return {
       highlight = {
         backdrop = false, -- disable graying out everything except matches
       },
+      label = {
+        -- allow uppercase labels
+        uppercase = false,
+      },
     }
   end,
 }

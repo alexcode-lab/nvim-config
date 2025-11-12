@@ -68,6 +68,7 @@ return {
         ['<C-y>'] = cmp.mapping.confirm { select = true },
       },
       sources = {
+        { name = 'luasnip' },
         { name = 'nvim_lsp' },
         {
           name = 'buffer',
@@ -80,7 +81,6 @@ return {
           },
         },
         { name = 'path' }, -- autocomplete path
-        { name = 'luasnip' },
         -- { name = 'cmdline' },
         -- { name = 'omni', option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } } },
       },
