@@ -79,7 +79,7 @@ return {
       desc = 'Command History',
     },
     {
-      '<leader>sn',
+      '<leader>sN',
       function()
         Snacks.picker.notifications()
       end,
