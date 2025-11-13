@@ -15,7 +15,7 @@ return {
       print('Added to harpoon as: ' .. res._length)
     end, { desc = '[A]dd file to harpoon' })
 
-    vim.keymap.set('n', '<leader>j', function()
+    vim.keymap.set('n', '<leader>h', function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end, { desc = 'Toggle Harpoon menu' })
 

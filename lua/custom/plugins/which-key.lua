@@ -6,15 +6,13 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- Document existing key chains
     require('which-key').add {
-      { '<leader>c', group = '[C]ode' },
-      { '<leader>d', group = '[D]ocument' },
+      { '<leader>f', group = '[F]ind file' },
+      { '<leader>s', group = '[S]earch in files' },
       { '<leader>r', group = '[R]ename' },
-      { '<leader>s', group = '[S]earch' },
-      { '<leader>w', group = '[W]orkspace' },
-      { '<leader>g', group = '[G]olang', icon = '󰟓' },
-      -- { '<leader>t', group = '[T]odo' },
-      { '<leader>j', group = 'Toggle Harpoon' },
-      { '<leader>n', group = '[N]oice' },
+      { '<leader>g', group = '[G]it' },
+      { '<leader>c', group = '[C]ode Actions' },
+      { '<leader>h', group = 'Toggle [H]arpoon' },
+      -- { '<leader>n', group = '[N]oice' },
 
       { ',j', group = 'Join object' },
       { ',s', group = 'Split object' },
