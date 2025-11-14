@@ -79,7 +79,6 @@ return { -- LSP Configuration & Plugins
         -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to [R]eferences' })
         -- vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, { desc = 'Go to [D]definition' })
         -- vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, { desc = 'Go to Type [D]definition' })
-        -- vim.keymap.set('n', '<leader>ds', vim.lsp.buf.document_symbol, { noremap = true, silent = true, desc = 'List document symbols' })
 
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
@@ -112,11 +111,13 @@ return { -- LSP Configuration & Plugins
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        -- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
-        -- Execute a code action, usually your cursor needs to be on top of an error
+        -- Execute a cone action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+        map('<leader>ls', vim.lsp.buf.document_symbol, '[L]ist document [s]ymbols')
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap.
