@@ -1,3 +1,7 @@
+-- Use ripgrep to search files
+-- Options: "fd"| "rg"| "find"
+local searchCmd = 'rg'
+
 return {
   'folke/snacks.nvim',
   -- TODO: test
@@ -29,33 +33,43 @@ return {
           },
         }
       end,
-      desc = 'File Explorer',
+      desc = 'File [E]xplorer',
     },
     {
       '<leader><leader>',
       function()
-        Snacks.picker.buffers { current = false }
+        Snacks.picker.buffers {
+          current = false,
+          win = {
+            input = {
+              keys = {
+                ['<c-d>'] = { 'bufdelete', mode = { 'n', 'i' } },
+                ['dd'] = { 'bufdelete', mode = { 'n' } },
+              },
+            },
+          },
+        }
       end,
       desc = 'Current Buffers',
     },
     {
       '<leader>ff',
       function()
-        Snacks.picker.files { cmd = 'rg' }
+        Snacks.picker.files { cmd = searchCmd }
       end,
       desc = 'Find [F]iles',
     },
     {
       '<leader>fs',
       function()
-        Snacks.picker.smart()
+        Snacks.picker.smart { cmd = searchCmd }
       end,
       desc = '[S]mart File find',
     },
     {
       '<leader>fg',
       function()
-        Snacks.picker.git_files()
+        Snacks.picker.git_files { cmd = searchCmd }
       end,
       desc = 'Find [G]it Files',
     },
@@ -69,14 +83,14 @@ return {
     {
       '<leader>fr',
       function()
-        Snacks.picker.recent()
+        Snacks.picker.recent { cmd = searchCmd }
       end,
       desc = 'Find [R]ecent files',
     },
     {
       '<leader>fn',
       function()
-        Snacks.picker.files { cmd = 'rg', cwd = vim.fn.stdpath 'config' }
+        Snacks.picker.files { cmd = searchCmd, cwd = vim.fn.stdpath 'config' }
       end,
       desc = 'Find [N]eovim File',
     },
@@ -100,7 +114,7 @@ return {
       function()
         Snacks.picker.lines()
       end,
-      desc = 'Buffer Lines',
+      desc = '[B]uffer fuzzy search',
     },
     {
       '<leader>/',
@@ -325,53 +339,53 @@ return {
     },
     -- git
     {
-      '<leader>gb',
+      '<leader>gt',
       function()
         Snacks.picker.git_branches()
       end,
-      desc = 'Git Branches',
+      desc = 'Git [t]ree Branches',
     },
     {
       '<leader>gl',
       function()
         Snacks.picker.git_log()
       end,
-      desc = 'Git Log',
+      desc = 'Git [l]og',
     },
     {
       '<leader>gL',
       function()
         Snacks.picker.git_log_line()
       end,
-      desc = 'Git Log Line',
+      desc = 'Git [L]og Line',
     },
     {
       '<leader>gs',
       function()
         Snacks.picker.git_status()
       end,
-      desc = 'Git Status',
+      desc = 'Git [s]tatus',
     },
     {
       '<leader>gS',
       function()
         Snacks.picker.git_stash()
       end,
-      desc = 'Git Stash',
+      desc = 'Git [S]tash',
     },
     {
       '<leader>gd',
       function()
         Snacks.picker.git_diff()
       end,
-      desc = 'Git Diff (Hunks)',
+      desc = 'Git [d]iff (Hunks)',
     },
     {
       '<leader>gf',
       function()
         Snacks.picker.git_log_file()
       end,
-      desc = 'Git Log File',
+      desc = 'Git Log [f]ile',
     },
   },
 }
