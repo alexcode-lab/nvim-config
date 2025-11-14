@@ -18,7 +18,16 @@ return {
     {
       '<leader>e',
       function()
-        Snacks.explorer()
+        Snacks.explorer {
+          win = {
+            list = {
+              keys = {
+                ['<C-o>'] = 'explorer_open', -- open with system application
+                ['o'] = 'confirm',
+              },
+            },
+          },
+        }
       end,
       desc = 'File Explorer',
     },

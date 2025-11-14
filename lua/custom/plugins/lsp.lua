@@ -98,7 +98,7 @@ return { -- LSP Configuration & Plugins
         --  Useful when your language has ways of declaring types without an actual implementation.
         -- map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
-        -- WARN: This is not Goto Definition, this is Goto Declaration.
+        -- NOTE: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
         -- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
