@@ -22,13 +22,14 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
     'saadparwaiz1/cmp_luasnip',
-    -- 'hrsh7th/cmp-cmdline', -- NOTE: not sure, autocomplete in command mode working even without it
     -- 'hrsh7th/cmp-omni',
   },
   config = function()
     -- See `:help cmp`
     local cmp = require 'cmp'
     local ls = require 'luasnip'
+    table.unpack = table.unpack or unpack
+
     ls.config.setup {}
 
     vim.keymap.set({ 'i', 's' }, '<C-l>', function()
@@ -38,6 +39,11 @@ return {
       ls.jump(-1)
     end, { silent = true })
 
+    local has_words_before = function()
+      local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+    end
+
     cmp.setup {
       snippet = {
         expand = function(args)
@@ -45,8 +51,13 @@ return {
         end,
       },
       completion = {
-        -- autocomplete = false,
+        autocomplete = false,
         completeopt = 'menu,menuone,noinsert',
+      },
+      matching = {
+        disallow_fuzzy_matching = true,
+        disallow_partial_matching = false,
+        disallow_prefix_unmatching = false,
       },
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
@@ -66,13 +77,41 @@ return {
 
         ['<CR>'] = cmp.mapping.confirm { select = true },
         ['<C-y>'] = cmp.mapping.confirm { select = true },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif ls.expand_or_jumpable() then
+            ls.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif ls.jumpable(-1) then
+            ls.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
       },
       sources = {
-        { name = 'luasnip' },
-        { name = 'nvim_lsp' },
+        { name = 'luasnip', priority = 1000 },
+        { name = 'nvim_lsp', priority = 750 },
         {
           name = 'buffer',
+          priority = 500,
           keyword_length = 2,
+          max_item_count = 7,
+          entry_filter = function(entry, ctx)
+            -- Get the text before cursor
+            local cursor_before_line = ctx.cursor_before_line
+            -- Disable buffer completions after common trigger characters
+            return not vim.regex([[\k\+\.\|:\|->]]):match_str(cursor_before_line)
+          end,
           option = {
             get_bufnrs = function()
               -- Use all listed buffers
@@ -80,9 +119,12 @@ return {
             end,
           },
         },
-        { name = 'path' }, -- autocomplete path
-        -- { name = 'cmdline' },
-        -- { name = 'omni', option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } } },
+        { name = 'path', priority = 250 }, -- autocomplete path
+        -- {
+        --   name = 'omni',
+        --   priority = 100,
+        --   option = { disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' } },
+        -- },
       },
     }
   end,

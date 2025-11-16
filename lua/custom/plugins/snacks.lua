@@ -6,14 +6,11 @@ return {
   'folke/snacks.nvim',
   -- TODO: test
   opts = {
-    picker = {
-      buffers = {
-        current = false,
-      },
-      sources = {
-        explorer = {},
-      },
-    },
+    -- picker = {
+    --   sources = {
+    --     explorer = {},
+    --   },
+    -- },
   },
   config = function()
     Snacks = require 'snacks'

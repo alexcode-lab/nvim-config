@@ -8,8 +8,7 @@ vim.keymap.set({ 'n', 'v' }, 'dm', '<cmd>delmarks a-zA-Z0-9 | echo "All marks we
 vim.keymap.set('n', 'tq', vim.cmd.TodoQuickFix, { desc = 'Open Todos in QuickFix' })
 vim.keymap.set('n', '<leader>nd', vim.cmd.NoiceDismiss, { desc = '[D]ismiss Noice Messages' })
 vim.keymap.set('n', '<leader>ns', vim.cmd.NoiceAll, { desc = '[S]how Noice Messages' })
-vim.keymap.set('n', '<leader>sn', vim.cmd.NoiceSnacks, { desc = 'Show [N]oice Snack Messages' })
-vim.keymap.set('n', '<leader>sL', vim.cmd.Lazy, { desc = 'Show [L]azy' })
+vim.keymap.set('n', '<leader>sn', vim.cmd.NoiceSnacks, { desc = 'Show [N]oice Messages' })
 
 -- vim.keymap.set({ 'n', 'v', 'i' }, '<C-f>', vim.cmd.NvimTreeToggle, { desc = 'Toggle Nvim [F]ile tree' })
 -- vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle [U]ndo tree' })

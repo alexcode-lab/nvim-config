@@ -3,8 +3,8 @@ return {
   ft = { 'go' },
   config = function()
     -- Go keymaps
-    vim.keymap.set('n', '<leader>ctj', '<cmd>GoAddTags json<CR>', { desc = 'Add [T]ags [J]son' })
-    vim.keymap.set('n', '<leader>ctd', '<cmd>GoAddTags db<CR>', { desc = 'Add [T]ags [D]b' })
-    vim.keymap.set('n', '<leader>ctr', '<cmd>GoRemoveTags<CR>', { desc = '[T]ags R[E]move' })
+    vim.keymap.set('n', '<leader>tj', '<cmd>GoAddTags json<CR>', { desc = 'Add [J]son tags' })
+    vim.keymap.set('n', '<leader>td', '<cmd>GoAddTags db<CR>', { desc = 'Add [D]b tags' })
+    vim.keymap.set('n', '<leader>tr', '<cmd>GoRemoveTags<CR>', { desc = '[R]emove tags' })
   end,
 }
