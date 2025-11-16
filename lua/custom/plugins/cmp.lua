@@ -43,6 +43,12 @@ return {
       local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
     end
+    local entry_filter = function(entry, ctx)
+      -- Get the text before cursor
+      local cursor_before_line = ctx.cursor_before_line
+      -- Disable buffer completions after common trigger characters
+      return not vim.regex([[\k\+\.\|:\|->]]):match_str(cursor_before_line)
+    end
 
     cmp.setup {
       snippet = {
@@ -99,19 +105,18 @@ return {
         end, { 'i', 's' }),
       },
       sources = {
-        { name = 'luasnip', priority = 1000 },
+        {
+          name = 'luasnip',
+          priority = 1000,
+          entry_filter = entry_filter,
+        },
         { name = 'nvim_lsp', priority = 750 },
         {
           name = 'buffer',
           priority = 500,
           keyword_length = 2,
           max_item_count = 7,
-          entry_filter = function(entry, ctx)
-            -- Get the text before cursor
-            local cursor_before_line = ctx.cursor_before_line
-            -- Disable buffer completions after common trigger characters
-            return not vim.regex([[\k\+\.\|:\|->]]):match_str(cursor_before_line)
-          end,
+          entry_filter = entry_filter,
           option = {
             get_bufnrs = function()
               -- Use all listed buffers
