@@ -28,7 +28,7 @@ return {
     -- See `:help cmp`
     local cmp = require 'cmp'
     local ls = require 'luasnip'
-    table.unpack = table.unpack or unpack
+    unpack = unpack or table.unpack
 
     ls.config.setup {}
 
@@ -40,10 +40,10 @@ return {
     end, { silent = true })
 
     local has_words_before = function()
-      local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
     end
-    local entry_filter = function(entry, ctx)
+    local entry_filter = function(_, ctx)
       -- Get the text before cursor
       local cursor_before_line = ctx.cursor_before_line
       -- Disable buffer completions after common trigger characters
@@ -57,13 +57,23 @@ return {
         end,
       },
       completion = {
-        autocomplete = false,
+        -- autocomplete = false,
         completeopt = 'menu,menuone,noinsert',
       },
       matching = {
         disallow_fuzzy_matching = true,
         disallow_partial_matching = false,
         disallow_prefix_unmatching = false,
+      },
+      window = {
+        -- completion = cmp.config.window.bordered {
+        --   border = 'rounded',
+        --   winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder',
+        -- },
+        documentation = cmp.config.window.bordered {
+          border = 'rounded',
+          winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder',
+        },
       },
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
