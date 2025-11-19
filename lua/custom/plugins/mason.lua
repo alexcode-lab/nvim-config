@@ -77,35 +77,6 @@ return { -- LSP Configuration & Plugins
         -- vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, { desc = 'Go to [D]definition' })
         -- vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, { desc = 'Go to Type [D]definition' })
 
-        -- Jump to the definition of the word under your cursor.
-        --  This is where a variable was first declared, or where a function is defined, etc.
-        --  To jump back, press <C-t>.
-        -- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-
-        -- Jump to the type of the word under your cursor.
-        --  Useful when you're not sure what type a variable is and you want to see
-        --  the definition of its *type*, not where it was *defined*.
-        -- map('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
-
-        -- Find references for the word under your cursor.
-        -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-
-        -- Jump to the implementation of the word under your cursor.
-        --  Useful when your language has ways of declaring types without an actual implementation.
-        -- map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-
-        -- NOTE: This is not Goto Definition, this is Goto Declaration.
-        --  For example, in C this would take you to the header.
-        -- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
-        -- Fuzzy find all the symbols in your current document.
-        --  Symbols are things like variables, functions, types, etc.
-        -- map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-
-        -- Fuzzy find all the symbols in your current workspace.
-        --  Similar to document symbols, except searches over your entire project.
-        -- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -163,92 +134,6 @@ return { -- LSP Configuration & Plugins
 
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    local servers = {
-      lua_ls = {
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' }, -- let the server know "vim" exists
-            },
-          },
-        },
-      },
-      pyright = {},
-      intelephense = {
-        files = {
-          maxSize = 1000000,
-        },
-        -- Ensure stubs are enabled
-        stubs = {
-          'bcmath',
-          'bz2',
-          'calendar',
-          'Core',
-          'curl',
-          'date',
-          'dba',
-          'dom',
-          'enchant',
-          'fileinfo',
-          'filter',
-          'ftp',
-          'gd',
-          'gettext',
-          'hash',
-          'iconv',
-          'imap',
-          'intl',
-          'json',
-          'ldap',
-          'libxml',
-          'mbstring',
-          'mcrypt',
-          'mysql',
-          'mysqli',
-          'password',
-          'pcntl',
-          'pcre',
-          'PDO',
-          'pdo_mysql',
-          'Phar',
-          'readline',
-          'recode',
-          'Reflection',
-          'regex',
-          'session',
-          'SimpleXML',
-          'soap',
-          'sockets',
-          'sodium',
-          'SPL',
-          'standard',
-          'superglobals',
-          'sysvsem',
-          'sysvshm',
-          'tokenizer',
-          'xml',
-          'xdebug',
-          'xmlreader',
-          'xmlwriter',
-          'yaml',
-          'zip',
-          'zlib',
-          'wordpress',
-          'phpunit',
-          'laravel',
-        },
-      },
-      -- phpactor = {},
-      gopls = {},
-      -- rust_analyzer = {},
-      -- solidity = {
-      --   cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
-      --   filetypes = { 'solidity' },
-      --   root_dir = require('lspconfig.util').find_git_ancestor,
-      --   single_file_support = true,
-      -- },
-    }
-
     -- Ensure the servers and tools above are installed
     --  To check the current status of installed tools and/or manually install
     --  other tools, you can run
@@ -259,25 +144,24 @@ return { -- LSP Configuration & Plugins
 
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
-    })
+    local ensure_installed = {
+      'lua_ls',
+      'stylua',
+      'superhtml',
+      'intelephense',
+      'laravel_ls',
+      'fixjson',
+      'gopls',
+      'pyright',
+      'cssls',
+      -- 'rust_analyzer',
+    }
+    -- print(vim.inspect(ensure_installed))
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     ---@diagnostic disable-next-line: missing-fields
     require('mason-lspconfig').setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          -- require('lspconfig')[server_name].setup(server)
-          vim.lsp.config[server_name].setup(server)
-        end,
-      },
+      ensure_installed = {},
     }
   end,
 }

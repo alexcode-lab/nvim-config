@@ -177,9 +177,12 @@ require('lazy').setup {
   { import = 'custom.plugins' },
 }
 
-vim.cmd.colorscheme 'kanagawa'
+require 'lsp.lua'
+require 'lsp.php'
 
 -- Custom settings
 require 'custom.config.settings'
 require 'custom.config.keymaps'
 require 'custom.config.marks'
+
+vim.cmd.colorscheme 'kanagawa'

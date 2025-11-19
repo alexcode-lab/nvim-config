@@ -34,7 +34,8 @@ return { -- Autoformat
       yaml = { 'prettier' },
       go = { name = 'gopls', timeout_ms = 500, lsp_format = 'prefer' },
       json = { 'fixjson' },
-      html = { 'prettier' },
+      html = { 'superhtml' },
+      blade = { 'blade-formatter' },
     },
     formatters = {
       php = {

@@ -9,6 +9,3 @@ vim.keymap.set('n', 'tq', vim.cmd.TodoQuickFix, { desc = 'Open Todos in QuickFix
 vim.keymap.set('n', '<leader>nd', vim.cmd.NoiceDismiss, { desc = '[D]ismiss Noice Messages' })
 vim.keymap.set('n', '<leader>ns', vim.cmd.NoiceAll, { desc = '[S]how Noice Messages' })
 vim.keymap.set('n', '<leader>sn', vim.cmd.NoiceSnacks, { desc = 'Show [N]oice Messages' })
-
--- vim.keymap.set({ 'n', 'v', 'i' }, '<C-f>', vim.cmd.NvimTreeToggle, { desc = 'Toggle Nvim [F]ile tree' })
--- vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle [U]ndo tree' })
