@@ -1,4 +1,2 @@
-vim.lsp.config['gopls'] = {
-  filetypes = { 'go' },
-}
+vim.lsp.config['gopls'] = {}
 vim.lsp.enable 'gopls'
