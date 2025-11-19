@@ -11,7 +11,7 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>g', group = '[G]it actions' },
       { '<leader>c', group = '[C]ode Actions' },
       { '<leader>h', group = '[H]arpoon toggle' },
-      { '<leader>n', group = '[N]oice' },
+      -- { '<leader>n', group = '[N]oice' },
 
       { ',j', group = 'Join object' },
       { ',s', group = 'Split object' },
