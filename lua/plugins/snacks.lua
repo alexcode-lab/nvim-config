@@ -4,13 +4,16 @@ local searchCmd = 'rg'
 
 return {
   'folke/snacks.nvim',
-  -- TODO: test
   opts = {
-    -- picker = {
-    --   sources = {
-    --     explorer = {},
-    --   },
-    -- },
+    picker = {
+      sources = {
+        files = {
+          -- cmd = { 'rg', '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
+          -- cmd = "rg --files --no-messages --color never -g '!.git'",
+        },
+        explorer = {},
+      },
+    },
   },
   config = function()
     Snacks = require 'snacks'
@@ -52,7 +55,10 @@ return {
     {
       '<leader>ff',
       function()
-        Snacks.picker.files { cmd = searchCmd }
+        Snacks.picker.files {
+          cmd = searchCmd,
+          args = { '--files', '--sortr', 'modified' },
+        }
       end,
       desc = 'Find [F]iles',
     },
