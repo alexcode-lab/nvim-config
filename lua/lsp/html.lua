@@ -1,4 +1,6 @@
 vim.lsp.config['superhtml'] = {
-  filetypes = { 'html', 'htm', 'blade' },
+  name = 'superhtml',
+  cmd = { 'superhtml', 'lsp' },
+  filetypes = { 'html', 'shtml', 'htm', 'blade' },
 }
 vim.lsp.enable 'superhtml'

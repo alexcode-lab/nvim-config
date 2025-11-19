@@ -1,6 +1,6 @@
 vim.lsp.config['intelephense'] = {
   -- Command and arguments to start the server.
-  -- cmd = { 'lua-language-server' },
+  -- cmd = { 'intelephense' },
   filetypes = { 'php' },
   settings = {
 
@@ -69,3 +69,8 @@ vim.lsp.config['intelephense'] = {
   },
 }
 vim.lsp.enable 'intelephense'
+
+vim.lsp.config['laravel_ls'] = {
+  filetypes = { 'php' },
+}
+vim.lsp.enable 'laravel_ls'

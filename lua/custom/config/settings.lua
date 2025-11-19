@@ -17,10 +17,11 @@ vim.o.secure = true
 vim.opt.foldenable = false
 vim.opt.foldlevel = 20
 
--- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
---   pattern = '*.blade.php',
---   command = 'set filetype=html',
--- })
+-- change blade templates type to html for using superhtml lsp
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.blade.php',
+  command = 'set filetype=html',
+})
 
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   callback = function()
