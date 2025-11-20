@@ -8,7 +8,7 @@ return {
     picker = {
       sources = {
         files = {
-          -- cmd = { 'rg', '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
+          -- args = { '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
           -- cmd = "rg --files --no-messages --color never -g '!.git'",
         },
         explorer = {},
@@ -57,7 +57,7 @@ return {
       function()
         Snacks.picker.files {
           cmd = searchCmd,
-          args = { '--files', '--sortr', 'modified' },
+          args = { '--sortr', 'modified' },
         }
       end,
       desc = 'Find [F]iles',

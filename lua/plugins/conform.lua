@@ -23,7 +23,7 @@ return { -- Autoformat
       -- languages here or re-enable it for the disabled ones.
       local disable_filetypes = { c = true, cpp = true }
       return {
-        timeout_ms = 500,
+        timeout_ms = 1000,
         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       }
     end,
@@ -32,7 +32,7 @@ return { -- Autoformat
       python = { 'autopep8' },
       php = { 'php' },
       yaml = { 'prettier' },
-      go = { name = 'gopls', timeout_ms = 500, lsp_format = 'prefer' },
+      go = { name = 'gopls', timeout_ms = 1000, lsp_format = 'prefer' },
       json = { 'fixjson' },
       -- html = { 'superhtml' },
       html = { 'blade-formatter' },

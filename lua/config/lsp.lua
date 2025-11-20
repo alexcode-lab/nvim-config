@@ -1,5 +1,5 @@
 -- Setting up LSP
--- Inline LSP diagnosic messages
+-- Inline LSP diagnostic messages
 vim.diagnostic.config {
   virtual_text = true,
   signs = true,
