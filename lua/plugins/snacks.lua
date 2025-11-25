@@ -7,16 +7,29 @@ return {
   opts = {
     picker = {
       sources = {
-        files = {
-          -- args = { '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
-          -- cmd = "rg --files --no-messages --color never -g '!.git'",
-        },
         explorer = {},
       },
     },
   },
   config = function()
     Snacks = require 'snacks'
+    Snacks.setup {
+      picker = {
+        sources = {
+          files = {
+            -- args = { '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
+            -- cmd = 'rg',
+          },
+        },
+        win = {
+          input = {
+            keys = {
+              ['<C-l>'] = { 'cancel', mode = { 'n', 'i' } },
+            },
+          },
+        },
+      },
+    }
   end,
   keys = {
     {
@@ -171,14 +184,14 @@ return {
       desc = 'Commands',
     },
     {
-      '<leader>sd',
+      '<leader>sD',
       function()
         Snacks.picker.diagnostics()
       end,
       desc = 'Diagnostics',
     },
     {
-      '<leader>sD',
+      '<leader>sd',
       function()
         Snacks.picker.diagnostics_buffer()
       end,

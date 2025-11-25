@@ -23,8 +23,8 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 -- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set('i', '<C-j>', '<ESC>', { desc = 'Exit from insert mode' })
-vim.keymap.set({ 'n', 'v' }, '<C-j>', '20j', { desc = 'Page down' })
-vim.keymap.set({ 'n', 'v' }, '<C-k>', '20k', { desc = 'Page up' })
+vim.keymap.set({ 'n', 'v' }, '<C-j>', '25j', { desc = 'Page down' })
+vim.keymap.set({ 'n', 'v' }, '<C-k>', '25k', { desc = 'Page up' })
 vim.keymap.set('n', '<F4>', vim.cmd.vsplit, { desc = 'Split verticaly' })
 vim.keymap.set({ 'n', 'v', 'i' }, '<F9>', '<cmd>split<CR><cmd>resize 15<CR><cmd>terminal<CR>i', { desc = '[F9] Open Terminal' })
 vim.keymap.set({ 'n', 'v', 'i' }, '<F10>', vim.cmd.close, { desc = '[F10] Close window' })

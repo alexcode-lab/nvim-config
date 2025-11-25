@@ -68,6 +68,7 @@ return {
           'selectioncount',
           {
             'diagnostics',
+            -- sources = { 'nvim_diagnostic', 'nvim_lsp' },
             sources = { 'nvim_diagnostic' },
             diagnostics_color = {
               error = { fg = colors.red },
