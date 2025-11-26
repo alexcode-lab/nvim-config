@@ -1,13 +1,11 @@
 -- Use ripgrep to search files
--- Options: "fd"| "rg"| "find"
-local searchCmd = 'rg'
 
 return {
   'folke/snacks.nvim',
   opts = {
     picker = {
       sources = {
-        explorer = {},
+        -- explorer = {},
       },
     },
   },
@@ -16,9 +14,10 @@ return {
     Snacks.setup {
       picker = {
         sources = {
+          explorer = {},
           files = {
-            -- args = { '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
             -- cmd = 'rg',
+            -- args = { '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
           },
         },
         win = {
@@ -69,7 +68,7 @@ return {
       '<leader>ff',
       function()
         Snacks.picker.files {
-          cmd = searchCmd,
+          cmd = 'rg',
           args = { '--sortr', 'modified' },
         }
       end,
@@ -78,14 +77,14 @@ return {
     {
       '<leader>fs',
       function()
-        Snacks.picker.smart { cmd = searchCmd }
+        Snacks.picker.smart { cmd = 'rg' }
       end,
       desc = '[S]mart File find',
     },
     {
       '<leader>fg',
       function()
-        Snacks.picker.git_files { cmd = searchCmd }
+        Snacks.picker.git_files { cmd = 'rg' }
       end,
       desc = 'Find [G]it Files',
     },
@@ -99,14 +98,14 @@ return {
     {
       '<leader>fr',
       function()
-        Snacks.picker.recent { cmd = searchCmd }
+        Snacks.picker.recent { cmd = 'rg' }
       end,
       desc = 'Find [R]ecent files',
     },
     {
       '<leader>fn',
       function()
-        Snacks.picker.files { cmd = searchCmd, cwd = vim.fn.stdpath 'config' }
+        Snacks.picker.files { cmd = 'rg', cwd = vim.fn.stdpath 'config' }
       end,
       desc = 'Find [N]eovim File',
     },
