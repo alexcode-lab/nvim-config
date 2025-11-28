@@ -155,7 +155,7 @@ return {
     },
     -- search
     {
-      '<leader>s"',
+      '<leader>sr',
       function()
         Snacks.picker.registers()
       end,
@@ -265,13 +265,6 @@ return {
         Snacks.picker.qflist()
       end,
       desc = 'Quickfix List',
-    },
-    {
-      '<leader>sR',
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = 'Resume',
     },
     {
       '<leader>u',
