@@ -47,15 +47,13 @@ return {
         map('n', '<leader>ghp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
         -- map('n', '<leader>gS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
         map('n', '<leader>gR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
-        map('n', '<leader>gb', gitsigns.blame_line, { desc = 'git [b]lame line' })
-        map('n', '<leader>gB', gitsigns.blame, { desc = 'git [B]lame full' })
-        -- map('n', '<leader>gd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
-        -- map('n', '<leader>gD', function()
-        --   gitsigns.diffthis '@'
-        -- end, { desc = 'git [D]iff against last commit' })
-        -- -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-        map('n', '<leader>td', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+        map('n', '<leader>gbl', gitsigns.blame_line, { desc = 'git [b]lame line' })
+        map('n', '<leader>gbb', gitsigns.blame, { desc = 'git [B]lame full' })
+        map('n', '<leader>gd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
+        map('n', '<leader>gD', function()
+          gitsigns.diffthis '@'
+        end, { desc = 'git [D]iff against last commit' })
+        map('n', '<leader>gtd', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
       end,
     },
   },

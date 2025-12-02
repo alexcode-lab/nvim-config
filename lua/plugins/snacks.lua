@@ -1,25 +1,10 @@
 -- Use ripgrep to search files
-
 return {
   'folke/snacks.nvim',
-  opts = {
-    picker = {
-      sources = {
-        -- explorer = {},
-      },
-    },
-  },
   config = function()
     Snacks = require 'snacks'
     Snacks.setup {
       picker = {
-        sources = {
-          explorer = {},
-          files = {
-            -- cmd = 'rg',
-            -- args = { '--files', '--no-messages', '--color', 'never', '-g', '!.git' },
-          },
-        },
         win = {
           input = {
             keys = {
@@ -273,13 +258,6 @@ return {
       end,
       desc = 'Undo History',
     },
-    {
-      '<leader>sC',
-      function()
-        Snacks.picker.colorschemes()
-      end,
-      desc = 'Colorschemes',
-    },
     -- LSP
     {
       'gd',
@@ -347,7 +325,7 @@ return {
     },
     -- git
     {
-      '<leader>gt',
+      '<leader>gbt',
       function()
         Snacks.picker.git_branches()
       end,
