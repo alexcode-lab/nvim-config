@@ -1,6 +1,12 @@
 -- Use ripgrep to search files
 return {
   'folke/snacks.nvim',
+  opts = {
+    -- Ensure snacks notifier is enabled to style notifications routed from Noice
+    notifier = { enabled = true },
+    -- If you use snacks.input, it overrides vim.ui.input nicely
+    input = { enabled = true },
+  },
   config = function()
     Snacks = require 'snacks'
     Snacks.setup {
@@ -36,6 +42,7 @@ return {
       '<leader><leader>',
       function()
         Snacks.picker.buffers {
+          sort_lastused = true,
           current = false,
           win = {
             input = {

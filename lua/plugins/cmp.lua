@@ -62,7 +62,7 @@ return {
         completeopt = 'menu,menuone,noinsert',
       },
       matching = {
-        disallow_fuzzy_matching = true,
+        disallow_fuzzy_matching = false,
         disallow_partial_matching = false,
         disallow_prefix_unmatching = false,
       },
