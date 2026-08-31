@@ -3,7 +3,7 @@ return {
   opts = {
     lsp = {
       signature = {
-        enabled = false, -- disable signature help popups
+        enabled = true, -- disable signature help popups
       },
       override = {
         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
