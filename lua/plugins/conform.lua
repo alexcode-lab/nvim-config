@@ -30,23 +30,13 @@ return { -- Autoformat
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'autopep8' },
-      php = { 'php' },
+      php = { 'php-cs-fixer' },
       yaml = { 'prettier' },
       go = { name = 'gopls', timeout_ms = 1000, lsp_format = 'prefer' },
       json = { 'fixjson' },
-      -- html = { 'superhtml' },
-      html = { 'blade-formatter' },
+      html = { 'superhtml' },
+      -- html = { 'blade-formatter' },
       blade = { 'blade-formatter' },
-    },
-    formatters = {
-      php = {
-        command = 'php-cs-fixer',
-        args = {
-          'fix',
-          '$FILENAME',
-        },
-        stdin = false,
-      },
     },
   },
 }

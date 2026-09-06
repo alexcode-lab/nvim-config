@@ -18,6 +18,7 @@ return { -- LSP Configuration & Plugins
       'superhtml',
       'intelephense',
       'laravel_ls',
+      'php-cs-fixer',
       'fixjson',
       'gopls',
       'pyright',

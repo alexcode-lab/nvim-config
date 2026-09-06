@@ -1,1 +1,1 @@
-vim.bo.filetype = 'html'
+-- vim.bo.filetype = 'html'
