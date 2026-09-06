@@ -25,6 +25,8 @@ return {
         'run',
         '--output.json.path',
         'stdout',
+        '--output.text.path=', -- disable text output entirely, don't route it anywhere
+        '--path-mode=abs',
         '--show-stats=false',
         './...',
       }
