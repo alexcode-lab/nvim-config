@@ -7,7 +7,7 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
-        go = { 'golangcilint', 'revive' },
+        go = { 'golangcilint' },
         rust = { 'cargo' },
       }
       lint.linters.cargo = {
@@ -18,12 +18,15 @@ return {
         ignore_exitcode = false,
         env = nil,
       }
-      local golangcilint = require 'lint.linters.golangcilint'
-      golangcilint.append_fname = true
+      local golangcilint = lint.linters.golangcilint
+      golangcilint.append_fname = false
+      golangcilint.ignore_exitcode = true
       golangcilint.args = {
         'run',
-        '--out-format',
-        'json',
+        '--output.json.path',
+        'stdout',
+        '--show-stats=false',
+        './...',
       }
       --[[ local phpcs = lint.linters.phpcs
       phpcs.args = {
