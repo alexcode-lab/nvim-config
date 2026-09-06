@@ -41,7 +41,7 @@ local function golangci_lint_project()
       end
 
       if decoded.Issues == vim.NIL or decoded.Issues == nil or #decoded.Issues == 0 then
-        vim.notify('golangci-lint: no issues found', vim.log.levels.INFO)
+        vim.notify('golangci-lint: SUCCESS! No issues found.', vim.log.levels.INFO)
         vim.fn.setqflist({}, ' ', { title = 'golangci-lint', items = {} })
         return
       end
