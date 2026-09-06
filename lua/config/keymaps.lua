@@ -32,4 +32,65 @@ vim.keymap.set({ 'n', 'v' }, 'dm', '<cmd>delmarks a-zA-Z0-9 | echo "All marks we
 vim.keymap.set('n', 'tq', vim.cmd.TodoQuickFix, { desc = 'Open Todos in QuickFix' })
 vim.keymap.set('n', '<leader>nd', vim.cmd.NoiceDismiss, { desc = '[D]ismiss Noice Messages' })
 vim.keymap.set('n', '<leader>ns', vim.cmd.NoiceAll, { desc = '[S]how Noice Messages' })
-vim.keymap.set('n', '<leader>sn', vim.cmd.NoiceSnacks, { desc = 'Show [N]oice Messages' })
+-- vim.keymap.set('n', '<leader>sn', vim.cmd.NoiceSnacks, { desc = 'Show [N]oice Messages' })
+
+local function noice_all_in_snacks()
+  local Snacks = require 'snacks'
+  local highlight = require 'snacks.picker.util.highlight'
+
+  require('noice').cmd 'all'
+
+  vim.schedule(function()
+    local buf = vim.api.nvim_get_current_buf()
+
+    -- Capture both the text and the highlight extmarks while
+    -- the Noice buffer still exists.
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+    local highlights = highlight.get_highlights {
+      buf = buf,
+      extmarks = true,
+    }
+
+    vim.cmd 'close'
+
+    local items = {}
+
+    for i = #lines, 1, -1 do
+      local line = lines[i]
+
+      if line:match '%S' then
+        items[#items + 1] = {
+          idx = i,
+          text = line,
+          highlights = highlights[i],
+        }
+      end
+    end
+
+    Snacks.picker.pick {
+      source = 'noice_all',
+      title = 'Noice: All Messages',
+      items = items,
+
+      format = function(item)
+        local ret = {
+          { item.text },
+        }
+
+        -- Add Noice's original highlight extmarks.
+        for _, extmark in ipairs(item.highlights or {}) do
+          ret[#ret + 1] = vim.deepcopy(extmark)
+        end
+
+        return ret
+      end,
+      layout = {
+        preset = 'select',
+      },
+
+      preview = 'none',
+    }
+  end)
+end
+
+vim.keymap.set('n', '<leader>sn', noice_all_in_snacks, { desc = 'Show [N]oice Messages (all, Snacks)' })
