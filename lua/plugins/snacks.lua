@@ -108,20 +108,20 @@ return {
       end,
       desc = 'Command History',
     },
-    {
-      '<leader>sN',
-      function()
-        Snacks.picker.notifications()
-      end,
-      desc = 'Notification History',
-    },
+    -- {
+    --   '<leader>sN',
+    --   function()
+    --     Snacks.picker.notifications()
+    --   end,
+    --   desc = 'Notification History',
+    -- },
     -- Grep
     {
       '<leader>sb',
       function()
         Snacks.picker.lines()
       end,
-      desc = '[B]uffer fuzzy search',
+      desc = 'Buffer fuzzy search',
     },
     {
       '<leader>/',
@@ -161,13 +161,6 @@ return {
       desc = 'Search History',
     },
     {
-      '<leader>sa',
-      function()
-        Snacks.picker.autocmds()
-      end,
-      desc = 'Autocmds',
-    },
-    {
       '<leader>sc',
       function()
         Snacks.picker.commands()
@@ -194,13 +187,6 @@ return {
         Snacks.picker.help()
       end,
       desc = 'Help Pages',
-    },
-    {
-      '<leader>sH',
-      function()
-        Snacks.picker.highlights()
-      end,
-      desc = 'Highlights',
     },
     {
       '<leader>si',
@@ -323,13 +309,13 @@ return {
       end,
       desc = 'LSP Symbols',
     },
-    {
-      '<leader>sS',
-      function()
-        Snacks.picker.lsp_workspace_symbols()
-      end,
-      desc = 'LSP Workspace Symbols',
-    },
+    -- {
+    --   '<leader>sS',
+    --   function()
+    --     Snacks.picker.lsp_workspace_symbols()
+    --   end,
+    --   desc = 'LSP Workspace Symbols',
+    -- },
     -- git
     {
       '<leader>gbt',

@@ -2,7 +2,7 @@
 --  See `:help vim.keymap.set()`
 vim.keymap.set('n', '<Esc>', vim.cmd.nohlsearch)
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic messages' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic under cursor' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -87,10 +87,8 @@ local function noice_all_in_snacks()
       layout = {
         preset = 'select',
       },
-
-      preview = 'none',
     }
   end)
 end
 
-vim.keymap.set('n', '<leader>sn', noice_all_in_snacks, { desc = 'Show [N]oice Messages (all, Snacks)' })
+vim.keymap.set('n', '<leader>sn', noice_all_in_snacks, { desc = 'Show All Noice Messages' })
