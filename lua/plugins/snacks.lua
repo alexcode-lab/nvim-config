@@ -42,6 +42,7 @@ return {
       '<leader><leader>',
       function()
         Snacks.picker.buffers {
+          preview = 'none',
           sort_lastused = true,
           current = false,
           win = {

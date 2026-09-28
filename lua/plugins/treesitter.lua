@@ -15,7 +15,6 @@ return { -- Highlight, edit, and navigate code
       'lua',
       'luadoc',
       'make',
-      -- 'markdown',
       'php',
       'phpdoc',
       'python',
